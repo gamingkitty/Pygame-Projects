@@ -3,6 +3,19 @@ import sys
 import player
 
 
+def make_tiled_image(image, width, height):
+    x_cursor = 0
+    y_cursor = 0
+    tiled_image = pygame.Surface((width, height))
+    while y_cursor < height:
+        while x_cursor < width:
+            tiled_image.blit(image, (x_cursor, y_cursor))
+            x_cursor += image.get_width()
+        y_cursor += image.get_height()
+        x_cursor = 0
+    return tiled_image
+
+
 def main():
     # Colors
     black = (0, 0, 0)
@@ -26,19 +39,29 @@ def main():
     screen_width = screen.get_width()
     screen_height = screen.get_height()
 
+    background_rect = pygame.Rect((0, 0), (screen_width, screen_height))
+    background_img = pygame.image.load("Sprites/background.png")
+    background_img = pygame.transform.scale(background_img, (screen_width, screen_height))
+
+    ground_rect = pygame.Rect((0, screen_height - 75), (screen_width, 75))
+    ground_img = pygame.image.load("Sprites/ground.png")
+    print(ground_img.get_size())
+    ground_img = make_tiled_image(ground_img, screen_width, 75)
+
     clock = pygame.time.Clock()
     fps = 60
 
     entities = []
     paused = False
 
-    bird_player = player.Player("Sprites/flappy_bird.png", (34, 24), (100, 100))
+    bird_player = player.Player(["Sprites/flappy_bird_up.png", "Sprites/flappy_bird_middle.png",
+                                 "Sprites/flappy_bird_down.png"], (68, 48), (400, 100))
     entities.append(bird_player)
 
     # Main Game Loop
     while True:
-        screen.fill(black)
-        delta_time = clock.tick(fps)/1000
+        screen.blit(background_img, background_rect)
+        delta_time = clock.tick(fps) / 1000
 
         # Handle entities
         for entity in entities:
@@ -52,6 +75,7 @@ def main():
                 if event.key == pygame.K_SPACE:
                     bird_player.velocity_y = -400
 
+        screen.blit(ground_img, ground_rect)
         # Update the screen
         pygame.display.flip()
 
