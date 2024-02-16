@@ -19,6 +19,7 @@ class Player:
         self.acceleration_x = 0
         self.animation_cooldown = 5
         self.animation_timer = 0
+
         self.dead = False
 
     # Loads the entity
@@ -32,10 +33,11 @@ class Player:
         # Similar situation with velocity.
         self.rect.centery += self.velocity_y * delta_time
         self.rect.centerx += self.velocity_x * delta_time
-        if self.rect.centery >= screen.get_height() - 75 - self.rect.size[0]/2:
+        if self.rect.centery >= screen.get_height() - 100 - self.rect.size[0]/2:
             screen.blit(pygame.transform.rotate(self.sprites[1], -90), self.rect)
-            self.rect.centery = screen.get_height() - 75 - self.rect.size[0]/2
+            self.rect.centery = screen.get_height() - 100 - self.rect.size[0]/2
             self.velocity_y = 0
+            self.acceleration_y = 0
             self.dead = True
         elif self.velocity_y > 500:
             screen.blit(pygame.transform.rotate(self.sprites[self.current_sprite], max(-((self.velocity_y-500) ** 2)/1000, -90)), self.rect)

@@ -43,10 +43,9 @@ def main():
     background_img = pygame.image.load("Sprites/background.png")
     background_img = pygame.transform.scale(background_img, (screen_width, screen_height))
 
-    ground_rect = pygame.Rect((0, screen_height - 75), (screen_width, 75))
+    ground_rect = pygame.Rect((0, screen_height - 100), (screen_width, 75))
     ground_img = pygame.image.load("Sprites/ground.png")
-    print(ground_img.get_size())
-    ground_img = make_tiled_image(ground_img, screen_width, 75)
+    ground_img = make_tiled_image(ground_img, screen_width * 3, 100)
 
     clock = pygame.time.Clock()
     fps = 60
@@ -62,7 +61,9 @@ def main():
     while True:
         screen.blit(background_img, background_rect)
         delta_time = clock.tick(fps) / 1000
-
+        ground_rect.centerx -= 2
+        if -ground_rect.centerx >= screen_width:
+            ground_rect.centerx = 0
         # Handle entities
         for entity in entities:
             entity.load(screen, delta_time, entities)
@@ -72,8 +73,9 @@ def main():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    bird_player.velocity_y = -400
+                if not bird_player.dead:
+                    if event.key == pygame.K_SPACE:
+                        bird_player.velocity_y = -400
 
         screen.blit(ground_img, ground_rect)
         # Update the screen
