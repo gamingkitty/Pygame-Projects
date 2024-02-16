@@ -57,7 +57,7 @@ def main():
     poles = []
     add_pole_cooldown = 150
     add_pole_timer = 150
-    pole_img = pygame.image.load("Sprites/pole.png")
+    pole_img = pygame.image.load("Sprites/pole_top.png")
     pole_width = 127
     pole_height = 504
     pole_img = pygame.transform.scale(pole_img, (pole_width, pole_height))
