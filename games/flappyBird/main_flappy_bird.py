@@ -18,6 +18,11 @@ def make_tiled_image(image, width, height):
     return tiled_image
 
 
+def draw_text(screen, font, text, location, color=(255, 255, 255)):
+    generated_text = font.render(text, True, color)
+    screen.blit(generated_text, (location[0] - generated_text.get_rect().size[0]/2, location[1] - generated_text.get_rect().size[1]/2))
+
+
 def main():
     # Colors
     black = (0, 0, 0)
@@ -54,12 +59,14 @@ def main():
 
     entities = []
     paused = False
+    font = pygame.font.Font(None, 70)
 
     # Helpers for poles
-    add_pole_cooldown = 150
+    add_pole_cooldown = 100
     add_pole_timer = 0
     pole_width = 127
     pole_height = 504
+    score = 0
 
     bird_player = player.Player(["Sprites/flappy_bird_up.png", "Sprites/flappy_bird_middle.png",
                                  "Sprites/flappy_bird_down.png"], (68, 48), (400, 100))
@@ -69,7 +76,7 @@ def main():
         screen.blit(background_img, background_rect)
         delta_time = clock.tick(fps) / 1000
         if not bird_player.dead:
-            ground_rect.centerx -= 200 * delta_time
+            ground_rect.centerx -= 400 * delta_time
         if -ground_rect.centerx >= screen_width:
             ground_rect.centerx = 0
         bird_player.load(screen, delta_time, bird_player)
@@ -83,6 +90,9 @@ def main():
                    remove_at.append(index)
                 if entity.has_collided(bird_player):
                     bird_player.dead = True
+                if entity.top_rect.centerx < bird_player.rect.centerx and not entity.added_score:
+                    score += 1
+                    entity.added_score = True
             index += 1
         num_removed = 0
         for index in remove_at:
@@ -94,8 +104,8 @@ def main():
         if not bird_player.dead:
             if add_pole_timer >= add_pole_cooldown:
                 add_pole_timer = 0
-                y = random.randrange(-pole_height + 75, 0)
-                entities.append(pole.Pole((screen_width, y), 250))
+                y = random.randrange(screen_height * 0.3, screen_height * 0.7 - 75) - (pole_height + 125)
+                entities.append(pole.Pole((screen_width, y), max(250 - score * 2, 105)))
             else:
                 add_pole_timer += 1
             # Handle key presses and other events
@@ -107,6 +117,7 @@ def main():
                     if event.key == pygame.K_SPACE:
                         bird_player.velocity_y = -400
 
+        draw_text(screen, font, str(score), (screen_width/2, 60))
         screen.blit(ground_img, ground_rect)
         # Update the screen
         pygame.display.flip()
