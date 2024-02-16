@@ -63,7 +63,6 @@ def main():
 
     bird_player = player.Player(["Sprites/flappy_bird_up.png", "Sprites/flappy_bird_middle.png",
                                  "Sprites/flappy_bird_down.png"], (68, 48), (400, 100))
-    entities.append(bird_player)
 
     # Main Game Loop
     while True:
@@ -73,11 +72,23 @@ def main():
             ground_rect.centerx -= 200 * delta_time
         if -ground_rect.centerx >= screen_width:
             ground_rect.centerx = 0
+        bird_player.load(screen, delta_time, bird_player)
         # Handle entities
+        remove_at = []
+        index = 0
         for entity in entities:
             entity.load(screen, delta_time, bird_player)
-            if entity.type == "pole" and entity.top_rect.centerx + pole_width < 0:
-                entities.remove(entity)
+            if entity.type == "pole":
+                if entity.top_rect.centerx + pole_width < 0:
+                   remove_at.append(index)
+                if entity.has_collided(bird_player):
+                    bird_player.dead = True
+            index += 1
+        num_removed = 0
+        for index in remove_at:
+            entities.pop(index - num_removed)
+            num_removed += 1
+
         # Display poles
         # Add new poles and pole timer iteration
         if not bird_player.dead:

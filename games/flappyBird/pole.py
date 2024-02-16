@@ -11,7 +11,7 @@ class Pole:
         self.top_rect = pygame.Rect(starting_position, self.top_img.get_size())
         self.bottom_rect = pygame.Rect((starting_position[0], starting_position[1] + self.top_img.get_size()[1] + size_between),
                                        self.bottom_img.get_size())
-        self.type = "Pole"
+        self.type = "pole"
 
     # Loads the entity
     def load(self, screen, delta_time, bird_player):
@@ -23,4 +23,4 @@ class Pole:
 
     # Determines whether another entity is overlapping this entity
     def has_collided(self, other_entity):
-        return self.rect.colliderect(other_entity.rect)
+        return self.top_rect.colliderect(other_entity.rect) or self.bottom_rect.colliderect(other_entity.rect)
