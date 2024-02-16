@@ -54,14 +54,16 @@ def main():
     paused = False
 
     # Helpers for poles
+    # First index top(0), bottom(1), or is_score_given(2), Second index image(0) or rect(1)
     poles = []
-    add_pole_cooldown = 150
-    add_pole_timer = 150
-    pole_img = pygame.image.load("Sprites/pole_top.png")
+    add_pole_cooldown = 100
+    add_pole_timer = 100
+    pole_top_img = pygame.image.load("Sprites/pole_top.png")
+    pole_bottom_img = pygame.image.load("Sprites/pole_bottom.png")
     pole_width = 127
     pole_height = 504
-    pole_img = pygame.transform.scale(pole_img, (pole_width, pole_height))
-
+    pole_top_img = pygame.transform.scale(pole_top_img, (pole_width, pole_height))
+    pole_bottom_img = pygame.transform.scale(pole_bottom_img, (pole_width, pole_height))
 
     bird_player = player.Player(["Sprites/flappy_bird_up.png", "Sprites/flappy_bird_middle.png",
                                  "Sprites/flappy_bird_down.png"], (68, 48), (400, 100))
@@ -69,32 +71,40 @@ def main():
 
     # Main Game Loop
     while True:
+        print(bird_player.score)
         screen.blit(background_img, background_rect)
         delta_time = clock.tick(fps) / 1000
         if not bird_player.dead:
             ground_rect.centerx -= 4
         if -ground_rect.centerx >= screen_width:
             ground_rect.centerx = 0
-        # Handle entities
-        for entity in entities:
-            entity.load(screen, delta_time, entities)
         # Display poles
+        num_to_remove = 0
         for pole in poles:
-            if pole[1].centerx < - pole_width:
-                poles.remove(pole)
+            if pole[0][1].x < -pole_width:
+                num_to_remove += 1
             else:
-                screen.blit(pole[0], pole[1])
+                screen.blit(pole[0][0], pole[0][1])
+                screen.blit(pole[1][0], pole[1][1])
                 if not bird_player.dead:
-                    pole[1].centerx -= 4
+                    pole[0][1].x -= 4
+                    pole[1][1].x -= 4
+        for i in range(num_to_remove):
+            poles.pop(0)
         # Add new poles and pole timer iteration
         if not bird_player.dead:
             if add_pole_timer >= add_pole_cooldown:
                 add_pole_timer = 0
-                y = random.randrange(-(pole_height//2), 0)
-                poles.append((pole_img, pygame.Rect((screen_width, y), (pole_width, pole_height))))
+                top_y = random.randrange(-(pole_height//2), 0)
+                bottom_y = random.randrange(top_y + pole_height + screen_height//5, top_y + pole_height + screen_height//4)
+                poles.append([(pole_top_img, pygame.Rect((screen_width, top_y), (pole_width, pole_height))),
+                              (pole_bottom_img, pygame.Rect((screen_width, bottom_y), (pole_width, pole_height))), False])
             else:
                 add_pole_timer += 1
-            # Handle key presses and other events
+        # Handle entities
+        for entity in entities:
+            entity.load(screen, delta_time, entities, poles)
+        # Handle key presses and other events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
