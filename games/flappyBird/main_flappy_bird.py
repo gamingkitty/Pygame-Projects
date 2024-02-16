@@ -29,6 +29,12 @@ def draw_text(screen, text, color, size, x, y, aligned="center"):
     screen.blit(text_surface, text_rect)
 
 
+def death_screen(screen, darken_surface, color, score):
+    screen.blit(darken_surface, (0, 0))
+    draw_text(screen, "Game Over!", color, 100, screen.get_width()/2, screen.get_height()/2.7)
+    draw_text(screen, "Final Score: " + str(score), color, 80, screen.get_width()/2, screen.get_height()/1.8)
+
+
 def main():
     # Colors
     black = (0, 0, 0)
@@ -41,6 +47,7 @@ def main():
     blue = (12, 246, 242)
     aqua = (5, 195, 221)
     red = (255, 0, 0)
+    dark_red = (183, 60, 47)
 
     # Initialization of variables and pygame
     pygame.init()
@@ -74,6 +81,10 @@ def main():
 
     bird_player = player.Player(["Sprites/flappy_bird_up.png", "Sprites/flappy_bird_middle.png",
                                  "Sprites/flappy_bird_down.png"], (68, 48), (400, 100))
+    # For death screen
+    darken_surface = pygame.Surface((screen_width, screen_height))
+    darken_surface.set_alpha(128)
+    darken_surface.fill((0, 0, 0))
 
     # Main Game Loop
     while True:
@@ -81,7 +92,7 @@ def main():
         screen.blit(background_img, background_rect)
         delta_time = clock.tick(fps) / 1000
         if not bird_player.dead:
-            ground_rect.centerx -= 200 * delta_time
+            ground_rect.centerx -= 300 * delta_time
         if -ground_rect.centerx >= screen_width:
             ground_rect.centerx = 0
         # Handle entities
@@ -114,8 +125,9 @@ def main():
                 add_pole_timer += 1
         # Load bird player last because it should be in front of poles
         bird_player.load(screen, delta_time, bird_player)
-        # Print the score
-        draw_text(screen, str(bird_player.score), black, 100, screen_width/2, screen_height/6)
+        # Print the score only if the player hasn't died
+        if not bird_player.dead:
+            draw_text(screen, str(bird_player.score), black, 100, screen_width/2, screen_height/6)
         # Handle key presses and other events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -126,6 +138,9 @@ def main():
                         bird_player.velocity_y = -400
 
         screen.blit(ground_img, ground_rect)
+
+        if bird_player.dead:
+            death_screen(screen, darken_surface, dark_red, bird_player.score)
         # Update the screen
         pygame.display.flip()
 
