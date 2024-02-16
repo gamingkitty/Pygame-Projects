@@ -20,6 +20,8 @@ class Player:
         self.animation_cooldown = 5
         self.animation_timer = 0
 
+        self.score = 0
+
         self.dead = False
 
     # Loads the entity
@@ -41,8 +43,11 @@ class Player:
             self.dead = True
         elif self.velocity_y > 500:
             screen.blit(pygame.transform.rotate(self.sprites[self.current_sprite], max(-((self.velocity_y-500) ** 2)/1000, -90)), self.rect)
-        else:
+        elif self.rect.centery >= 0:
             screen.blit(pygame.transform.rotate(self.sprites[self.current_sprite], 20), self.rect)
+        else:
+            self.rect.centery = 5
+            self.dead = True
         if not self.dead:
             if self.animation_timer >= self.animation_cooldown:
                 self.current_sprite += 1

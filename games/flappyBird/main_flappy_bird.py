@@ -18,6 +18,17 @@ def make_tiled_image(image, width, height):
     return tiled_image
 
 
+def draw_text(screen, text, color, size, x, y, aligned="center"):
+    font = pygame.font.Font("flappy.ttf", size)
+    text_surface = font.render(text, True, color)
+    text_rect = text_surface.get_rect()
+    if aligned == "center":
+        text_rect.center = (x, y)
+    elif aligned == "topleft":
+        text_rect.topleft = (x, y)
+    screen.blit(text_surface, text_rect)
+
+
 def main():
     # Colors
     black = (0, 0, 0)
@@ -66,13 +77,13 @@ def main():
 
     # Main Game Loop
     while True:
+        print(bird_player.score )
         screen.blit(background_img, background_rect)
         delta_time = clock.tick(fps) / 1000
         if not bird_player.dead:
             ground_rect.centerx -= 200 * delta_time
         if -ground_rect.centerx >= screen_width:
             ground_rect.centerx = 0
-        bird_player.load(screen, delta_time, bird_player)
         # Handle entities
         remove_at = []
         index = 0
@@ -83,6 +94,9 @@ def main():
                    remove_at.append(index)
                 if entity.has_collided(bird_player):
                     bird_player.dead = True
+                if not entity.point_given and entity.top_rect.x < bird_player.rect.centerx < entity.top_rect.x + pole_width:
+                    bird_player.score += 1
+                    entity.point_given = True
             index += 1
         num_removed = 0
         for index in remove_at:
@@ -95,10 +109,14 @@ def main():
             if add_pole_timer >= add_pole_cooldown:
                 add_pole_timer = 0
                 y = random.randrange(-(pole_height//2), 0)
-                entities.append(pole.Pole((screen_width, y), 250))
+                entities.append(pole.Pole((screen_width, y), 250, False))
             else:
                 add_pole_timer += 1
-            # Handle key presses and other events
+        # Load bird player last because it should be in front of poles
+        bird_player.load(screen, delta_time, bird_player)
+        # Print the score
+        draw_text(screen, str(bird_player.score), black, 100, screen_width/2, screen_height/6)
+        # Handle key presses and other events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
