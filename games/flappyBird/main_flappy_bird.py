@@ -61,7 +61,7 @@ def main():
     while True:
         screen.blit(background_img, background_rect)
         delta_time = clock.tick(fps) / 1000
-        ground_rect.centerx -= 2
+        ground_rect.centerx -= 4
         if -ground_rect.centerx >= screen_width:
             ground_rect.centerx = 0
         # Handle entities
