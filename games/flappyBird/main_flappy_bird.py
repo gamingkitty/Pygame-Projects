@@ -1,7 +1,7 @@
 import pygame
 import sys
 import player
-
+import random
 
 def make_tiled_image(image, width, height):
     x_cursor = 0
@@ -53,6 +53,16 @@ def main():
     entities = []
     paused = False
 
+    # Helpers for poles
+    poles = []
+    add_pole_cooldown = 150
+    add_pole_timer = 150
+    pole_img = pygame.image.load("Sprites/pole.png")
+    pole_width = 127
+    pole_height = 504
+    pole_img = pygame.transform.scale(pole_img, (pole_width, pole_height))
+
+
     bird_player = player.Player(["Sprites/flappy_bird_up.png", "Sprites/flappy_bird_middle.png",
                                  "Sprites/flappy_bird_down.png"], (68, 48), (400, 100))
     entities.append(bird_player)
@@ -61,14 +71,30 @@ def main():
     while True:
         screen.blit(background_img, background_rect)
         delta_time = clock.tick(fps) / 1000
-        ground_rect.centerx -= 4
+        if not bird_player.dead:
+            ground_rect.centerx -= 4
         if -ground_rect.centerx >= screen_width:
             ground_rect.centerx = 0
         # Handle entities
         for entity in entities:
             entity.load(screen, delta_time, entities)
-
-        # Handle key presses and other events
+        # Display poles
+        for pole in poles:
+            if pole[1].centerx < - pole_width:
+                poles.remove(pole)
+            else:
+                screen.blit(pole[0], pole[1])
+                if not bird_player.dead:
+                    pole[1].centerx -= 4
+        # Add new poles and pole timer iteration
+        if not bird_player.dead:
+            if add_pole_timer >= add_pole_cooldown:
+                add_pole_timer = 0
+                y = random.randrange(-(pole_height//2), 0)
+                poles.append((pole_img, pygame.Rect((screen_width, y), (pole_width, pole_height))))
+            else:
+                add_pole_timer += 1
+            # Handle key presses and other events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
