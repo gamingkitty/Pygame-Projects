@@ -56,8 +56,8 @@ def main():
     paused = False
 
     # Helpers for poles
-    add_pole_cooldown = 150
-    add_pole_timer = 0
+    add_pole_cooldown = 100
+    add_pole_timer = 100
     pole_width = 127
     pole_height = 504
 
@@ -94,7 +94,7 @@ def main():
         if not bird_player.dead:
             if add_pole_timer >= add_pole_cooldown:
                 add_pole_timer = 0
-                y = random.randrange(-pole_height + 75, 0)
+                y = random.randrange(-(pole_height//2), 0)
                 entities.append(pole.Pole((screen_width, y), 250))
             else:
                 add_pole_timer += 1
