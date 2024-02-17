@@ -12,7 +12,7 @@ class Pole:
         self.bottom_rect = pygame.Rect((starting_position[0], starting_position[1] + self.top_img.get_size()[1] + size_between),
                                        self.bottom_img.get_size())
         self.type = "pole"
-        self.added_score = False
+        self.point_given = False
 
     # Loads the entity
     def load(self, screen, delta_time, bird_player):
