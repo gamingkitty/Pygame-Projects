@@ -1,7 +1,7 @@
 import button
 
 
-class Relic():
+class Relic:
     def __init__(self, image, size, location, type):
         self.button = button.Button(image, size, location)
         self.type = type
@@ -40,5 +40,6 @@ class Relic():
 
             if self.bought_count >= 5:
                 relics.remove(self)
-
-
+        elif self.type == "heatseeking":
+            character.has_heat_seeking = True
+            relics.remove(self)

@@ -103,8 +103,11 @@ while True:
                                       (-500, screen_height / 2), "upgradepoint")
     heal_relic = relic.Relic(pygame.image.load("Sprites/Relics/healrelic.png"), (120, 200),
                              (-500, screen_height / 2), "heal")
+    heat_seeking_relic = relic.Relic(pygame.image.load("Sprites/Relics/heatseekingrelic.png"), (120, 200),
+                               (-500, screen_height / 2), "heatseeking")
 
-    offered_relics = [medpack_relic, reload_relic, lifesteal_relic, max_upgrade_relic, scream_shield_relic, upgrade_point_relic, heal_relic]
+    offered_relics = [medpack_relic, reload_relic, lifesteal_relic, max_upgrade_relic, scream_shield_relic,
+                      upgrade_point_relic, heal_relic, heat_seeking_relic]
 
     #bars
     #percent_full, size, location, color, background_color, border_percentx, border_percenty
@@ -214,8 +217,6 @@ while True:
 
     relic_picked = False
 
-    minutes = 0
-
     while True:
         SCREEN.fill(BLACK)
         CLOCK.tick(FPS)
@@ -258,7 +259,7 @@ while True:
         for scream in screams:
             scream.load(SCREEN)
             if not paused:
-                scream.move()
+                scream.move([sanses, Bosses, rock_lobbers])
                 if not SCREEN.get_rect().contains(scream.rect):
                     screams.remove(scream)
         for missle in missles:
