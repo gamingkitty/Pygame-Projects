@@ -20,7 +20,7 @@ class Player:
         self.has_shield = False
         self.has_scream_shield = False
         self.lifesteal = 0
-        self.has_heat_seeking = True
+        self.has_heat_seeking = False
 
         self.upgrade_points = 0
         self.level = 1

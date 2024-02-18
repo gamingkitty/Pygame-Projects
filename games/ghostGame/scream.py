@@ -48,10 +48,15 @@ class Scream(pygame.sprite.Sprite):
                         wanted_angle += math.pi
                     elif d_y < 0 and d_x > 0:
                         wanted_angle += math.pi
-                if self.angle > wanted_angle:
-                    self.angle -= (self.angle-wanted_angle)/30
-                else:
-                    self.angle += (wanted_angle-self.angle)/30
-                print(int(distance/60))
+                if wanted_angle > math.pi:
+                    wanted_angle = -(2*math.pi - wanted_angle)
+                elif wanted_angle < -math.pi:
+                    wanted_angle = 2*math.pi + wanted_angle
+                angle_error = wanted_angle - self.angle
+                while angle_error > math.pi:
+                    angle_error -= 2 * math.pi
+                while angle_error < -math.pi:
+                    angle_error += 2 * math.pi
+                self.angle += angle_error/50
         self.rect.centerx += math.cos(self.angle) * self.speed
         self.rect.centery += math.sin(self.angle) * self.speed
