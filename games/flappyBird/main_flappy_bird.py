@@ -4,7 +4,7 @@ import player
 import random
 import pole
 
-#no
+
 def make_tiled_image(image, width, height):
     x_cursor = 0
     y_cursor = 0
