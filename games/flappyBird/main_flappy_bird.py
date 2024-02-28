@@ -76,7 +76,7 @@ def main():
         screen.blit(background_img, background_rect)
         delta_time = clock.tick(fps) / 1000
         if not bird_player.dead:
-            ground_rect.centerx -= 400 * delta_time
+            ground_rect.centerx -= 200 * delta_time
         if -ground_rect.centerx >= screen_width:
             ground_rect.centerx = 0
         bird_player.load(screen, delta_time, bird_player)

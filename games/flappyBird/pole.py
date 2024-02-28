@@ -17,8 +17,8 @@ class Pole:
     # Loads the entity
     def load(self, screen, delta_time, bird_player):
         if not bird_player.dead:
-            self.top_rect.centerx -= 400 * delta_time
-            self.bottom_rect.centerx -= 400 * delta_time
+            self.top_rect.centerx -= 200 * delta_time
+            self.bottom_rect.centerx -= 200 * delta_time
         screen.blit(self.top_img, self.top_rect)
         screen.blit(self.bottom_img, self.bottom_rect)
 
