@@ -91,7 +91,6 @@ def main():
 
     # Main Game Loop
     while True:
-        print(bird_player.score )
         screen.blit(background_img, background_rect)
         delta_time = clock.tick(fps) / 1000
         if not bird_player.dead:
