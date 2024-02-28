@@ -122,8 +122,8 @@ def main():
         if not bird_player.dead:
             if add_pole_timer >= add_pole_cooldown:
                 add_pole_timer = 0
-                y = random.randrange(-pole_height + int(screen_height/10), 0)
-                entities.append(pole.Pole((screen_width, y), 250, False))
+                y = random.randrange(-pole_height + int(screen_height/8), 0)
+                entities.append(pole.Pole((screen_width, y), 250, False, (pole_width, pole_height)))
             else:
                 add_pole_timer += 1
         # Load bird player last because it should be in front of poles
