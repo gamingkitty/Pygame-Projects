@@ -91,7 +91,7 @@ def main():
 
     # Main Game Loop
     while True:
-        print(bird_player.score )
+        print(bird_player.score)
         screen.blit(background_img, background_rect)
         delta_time = clock.tick(fps) / 1000
         if not bird_player.dead:
@@ -122,7 +122,7 @@ def main():
         if not bird_player.dead:
             if add_pole_timer >= add_pole_cooldown:
                 add_pole_timer = 0
-                y = random.randrange(-pole_height + int(screen_height/10), 0)
+                y = random.randrange(-pole_height + int(screen_height/10), -150)
                 entities.append(pole.Pole((screen_width, y), 250, False))
             else:
                 add_pole_timer += 1
