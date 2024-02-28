@@ -18,9 +18,21 @@ def make_tiled_image(image, width, height):
     return tiled_image
 
 
-def draw_text(screen, font, text, location, color=(255, 255, 255)):
-    generated_text = font.render(text, True, color)
-    screen.blit(generated_text, (location[0] - generated_text.get_rect().size[0]/2, location[1] - generated_text.get_rect().size[1]/2))
+def draw_text(screen, text, color, size, x, y, aligned="center"):
+    font = pygame.font.Font("flappy.ttf", size)
+    text_surface = font.render(text, True, color)
+    text_rect = text_surface.get_rect()
+    if aligned == "center":
+        text_rect.center = (x, y)
+    elif aligned == "topleft":
+        text_rect.topleft = (x, y)
+    screen.blit(text_surface, text_rect)
+
+
+def death_screen(screen, darken_surface, color, score):
+    screen.blit(darken_surface, (0, 0))
+    draw_text(screen, "Game Over!", color, 100, screen.get_width()/2, screen.get_height()/2.7)
+    draw_text(screen, "Final Score: " + str(score), color, 80, screen.get_width()/2, screen.get_height()/1.8)
 
 
 def main():
@@ -35,6 +47,7 @@ def main():
     blue = (12, 246, 242)
     aqua = (5, 195, 221)
     red = (255, 0, 0)
+    dark_red = (183, 60, 47)
 
     # Initialization of variables and pygame
     pygame.init()
@@ -59,27 +72,29 @@ def main():
 
     entities = []
     paused = False
-    font = pygame.font.Font(None, 70)
 
     # Helpers for poles
     add_pole_cooldown = 100
-    add_pole_timer = 0
+    add_pole_timer = 100
     pole_width = 127
     pole_height = 504
-    score = 0
 
     bird_player = player.Player(["Sprites/flappy_bird_up.png", "Sprites/flappy_bird_middle.png",
                                  "Sprites/flappy_bird_down.png"], (68, 48), (400, 100))
+    # For death screen
+    darken_surface = pygame.Surface((screen_width, screen_height))
+    darken_surface.set_alpha(128)
+    darken_surface.fill((0, 0, 0))
 
     # Main Game Loop
     while True:
+        print(bird_player.score )
         screen.blit(background_img, background_rect)
         delta_time = clock.tick(fps) / 1000
         if not bird_player.dead:
-            ground_rect.centerx -= 200 * delta_time
+            ground_rect.centerx -= 300 * delta_time
         if -ground_rect.centerx >= screen_width:
             ground_rect.centerx = 0
-        bird_player.load(screen, delta_time, bird_player)
         # Handle entities
         remove_at = []
         index = 0
@@ -90,9 +105,9 @@ def main():
                    remove_at.append(index)
                 if entity.has_collided(bird_player):
                     bird_player.dead = True
-                if entity.top_rect.centerx < bird_player.rect.centerx and not entity.added_score:
-                    score += 1
-                    entity.added_score = True
+                if not entity.point_given and entity.top_rect.x < bird_player.rect.centerx < entity.top_rect.x + pole_width:
+                    bird_player.score += 1
+                    entity.point_given = True
             index += 1
         num_removed = 0
         for index in remove_at:
@@ -104,11 +119,16 @@ def main():
         if not bird_player.dead:
             if add_pole_timer >= add_pole_cooldown:
                 add_pole_timer = 0
-                y = random.randrange(screen_height * 0.3, screen_height * 0.7 - 75) - (pole_height + 125)
-                entities.append(pole.Pole((screen_width, y), max(250 - score * 2, 105)))
+                y = random.randrange(-(pole_height//2), 0)
+                entities.append(pole.Pole((screen_width, y), 250, False))
             else:
                 add_pole_timer += 1
-            # Handle key presses and other events
+        # Load bird player last because it should be in front of poles
+        bird_player.load(screen, delta_time, bird_player)
+        # Print the score only if the player hasn't died
+        if not bird_player.dead:
+            draw_text(screen, str(bird_player.score), black, 100, screen_width/2, screen_height/6)
+        # Handle key presses and other events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -117,8 +137,10 @@ def main():
                     if event.key == pygame.K_SPACE:
                         bird_player.velocity_y = -400
 
-        draw_text(screen, font, str(score), (screen_width/2, 60))
         screen.blit(ground_img, ground_rect)
+
+        if bird_player.dead:
+            death_screen(screen, darken_surface, dark_red, bird_player.score)
         # Update the screen
         pygame.display.flip()
 
