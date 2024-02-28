@@ -120,7 +120,7 @@ def main():
             if add_pole_timer >= add_pole_cooldown:
                 add_pole_timer = 0
                 y = random.randrange(-(pole_height//2), 0)
-                entities.append(pole.Pole((screen_width, y), 250, False))
+                entities.append(pole.Pole((screen_width, y), 250-2 * bird_player.score, False))
             else:
                 add_pole_timer += 1
         # Load bird player last because it should be in front of poles
