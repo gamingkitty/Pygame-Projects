@@ -76,8 +76,11 @@ def main():
     # Helpers for poles
     add_pole_cooldown = 100
     add_pole_timer = 100
-    pole_width = 127
-    pole_height = 504
+    pole_width = int(screen_width * 0.0794)
+    pole_height = int(screen_height * 0.56)
+
+    print(screen_width)
+    print(screen_height)
 
     bird_player = player.Player(["Sprites/flappy_bird_up.png", "Sprites/flappy_bird_middle.png",
                                  "Sprites/flappy_bird_down.png"], (68, 48), (400, 100))
@@ -119,8 +122,8 @@ def main():
         if not bird_player.dead:
             if add_pole_timer >= add_pole_cooldown:
                 add_pole_timer = 0
-                y = random.randrange(-(pole_height//2), 0)
-                entities.append(pole.Pole((screen_width, y), 250-2 * bird_player.score, False))
+                y = random.randrange(-pole_height + int(screen_height/10), 0)
+                entities.append(pole.Pole((screen_width, y), 250, False))
             else:
                 add_pole_timer += 1
         # Load bird player last because it should be in front of poles
