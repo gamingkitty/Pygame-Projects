@@ -10,18 +10,10 @@ import shopitem
 import BossMain
 import medpack
 import relic
-import os
 
 
-def resource_path(relative):
-    if hasattr(sys, "_MEIPASS"):
-        return os.path.join(sys._MEIPASS, relative)
-    return os.path.join(relative)
-
-
-# KEEP CODE CLEAN
-# KCC
-
+#KEEP CODE CLEAN
+#KCC
 
 while True:
     pygame.init()
@@ -74,9 +66,9 @@ while True:
 
     #screen visuals for menus
     #button: image_path, size, location
-    quit_button = button.Button(pygame.image.load(resource_path("Sprites/quit.png")), (262, 92), (screen_width / 2, screen_height / 1.8))
+    quit_button = button.Button(pygame.image.load("Sprites/quit.png"), (262, 92), (screen_width / 2, screen_height / 1.8))
 
-    replay_button = button.Button(pygame.image.load(resource_path("Sprites/replay.png")), (262, 82), (screen_width / 2, screen_height / 1.53))
+    replay_button = button.Button(pygame.image.load("Sprites/replay.png"), (262, 82), (screen_width / 2, screen_height / 1.53))
 
     darken_surface = pygame.Surface((screen_width, screen_height))
     darken_surface.set_alpha(128)
@@ -98,21 +90,21 @@ while True:
     shield_unlock_upgrade = shopitem.ShopItem(3, 0, "Unlock Shield", YELLOW, 60, DARK_GRAY, (282, 40), (screen_width * 0.865, 740), "shield_unlock", 2, 1)
 
     #relics
-    medpack_relic = relic.Relic(pygame.image.load(resource_path("Sprites/Relics/medpackrelic.png")), (120, 200),
+    medpack_relic = relic.Relic(pygame.image.load("Sprites/Relics/medpackrelic.png"), (120, 200),
                                 (-500, screen_height/2), "medpack")
-    reload_relic = relic.Relic(pygame.image.load(resource_path("Sprites/Relics/reloadrelic.png")), (120, 200),
+    reload_relic = relic.Relic(pygame.image.load("Sprites/Relics/reloadrelic.png"), (120, 200),
                                (-500, screen_height / 2), "reload")
-    lifesteal_relic = relic.Relic(pygame.image.load(resource_path("Sprites/Relics/lifestealrelic.png")), (120, 200),
+    lifesteal_relic = relic.Relic(pygame.image.load("Sprites/Relics/lifestealrelic.png"), (120, 200),
                                   (-500, screen_height / 2), "lifesteal")
-    max_upgrade_relic = relic.Relic(pygame.image.load(resource_path("Sprites/Relics/maxupgraderelic.png")), (120, 200),
+    max_upgrade_relic = relic.Relic(pygame.image.load("Sprites/Relics/maxupgraderelic.png"), (120, 200),
                                     (-500, screen_height / 2), "maxupgrade")
-    scream_shield_relic = relic.Relic(pygame.image.load(resource_path("Sprites/Relics/screamshieldrelic.png")), (120, 200),
+    scream_shield_relic = relic.Relic(pygame.image.load("Sprites/Relics/screamshieldrelic.png"), (120, 200),
                                       (-500, screen_height / 2), "screamshield")
-    upgrade_point_relic = relic.Relic(pygame.image.load(resource_path("Sprites/Relics/upgradepointrelic.png")), (120, 200),
+    upgrade_point_relic = relic.Relic(pygame.image.load("Sprites/Relics/upgradepointrelic.png"), (120, 200),
                                       (-500, screen_height / 2), "upgradepoint")
-    heal_relic = relic.Relic(pygame.image.load(resource_path("Sprites/Relics/healrelic.png")), (120, 200),
+    heal_relic = relic.Relic(pygame.image.load("Sprites/Relics/healrelic.png"), (120, 200),
                              (-500, screen_height / 2), "heal")
-    heat_seeking_relic = relic.Relic(pygame.image.load(resource_path("Sprites/Relics/heatseekingrelic.png")), (120, 200),
+    heat_seeking_relic = relic.Relic(pygame.image.load("Sprites/Relics/heatseekingrelic.png"), (120, 200),
                                (-500, screen_height / 2), "heatseeking")
 
     offered_relics = [medpack_relic, reload_relic, lifesteal_relic, max_upgrade_relic, scream_shield_relic,
