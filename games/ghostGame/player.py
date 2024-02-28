@@ -3,7 +3,7 @@ import math
 import scream
 
 
-class Player(pygame.sprite.Sprite):
+class Player:
     def __init__(self, speed, max_hp, attack_power, projectile_speed, scream_delay, max_bullets, pierce, shield_duration, reload_speed, shield_cooldown_time, reload_bar, medpack_chance, size=(64, 64)):
         # stats
         self.speed = speed
@@ -20,6 +20,7 @@ class Player(pygame.sprite.Sprite):
         self.has_shield = False
         self.has_scream_shield = False
         self.lifesteal = 0
+        self.has_heat_seeking = False
 
         self.upgrade_points = 0
         self.level = 1
@@ -90,7 +91,7 @@ class Player(pygame.sprite.Sprite):
             rel_x = mouse_x - self.rect.x
             rel_y = mouse_y - self.rect.y
             angle = math.atan2(rel_y, rel_x)
-            new_scream = scream.Scream(self.attack_power, self.projectile_speed, self.pierce, (32, 32))
+            new_scream = scream.Scream(self.attack_power, self.projectile_speed, self.pierce, self.has_heat_seeking, (32, 32))
             new_scream.angle = angle
             new_scream.rect.center = self.rect.center
             screams.append(new_scream)
@@ -118,14 +119,14 @@ class Player(pygame.sprite.Sprite):
         self.shield = False
 
     def stay_on_screen(self, screen_width, screen_height):
-        if self.rect.centery < 0:
-            self.rect.centery = 0
-        if self.rect.centery > screen_height:
-            self.rect.centery = screen_height
-        if self.rect.centerx < 0:
-            self.rect.centerx = 0
-        if self.rect.centerx > screen_width:
-            self.rect.centerx = screen_width
+        if self.rect.y < 0:
+            self.rect.y = 0
+        if self.rect.y + self.rect.h > screen_height:
+            self.rect.y = screen_height-self.rect.h
+        if self.rect.x < 0:
+            self.rect.x = 0
+        if self.rect.x + self.rect.w > screen_width:
+            self.rect.x = screen_width-self.rect.w
 
     def reload(self):
         self.bullets = self.max_bullets
@@ -139,7 +140,7 @@ class Player(pygame.sprite.Sprite):
 
     def burst_scream(self, screams):
         for i in range(20):
-            new_scream = scream.Scream(self.attack_power * 2, self.projectile_speed, self.pierce * 2, (32, 32))
+            new_scream = scream.Scream(self.attack_power * 2, self.projectile_speed, self.pierce * 2, self.has_heat_seeking, (32, 32))
             new_scream.angle = i * 18
             new_scream.rect.center = self.rect.center
             screams.append(new_scream)
