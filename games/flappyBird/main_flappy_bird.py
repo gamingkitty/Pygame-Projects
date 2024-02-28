@@ -104,7 +104,7 @@ def main():
         if not bird_player.dead:
             if add_pole_timer >= add_pole_cooldown:
                 add_pole_timer = 0
-                y = random.randrange(screen_height * 0.3, screen_height * 0.7 - 75) - (pole_height + 125)
+                y = random.randrange(int(screen_height * 0.3), int(screen_height * 0.7 - 75)) - (pole_height + 125)
                 entities.append(pole.Pole((screen_width, y), max(250 - score * 2, 105)))
             else:
                 add_pole_timer += 1
