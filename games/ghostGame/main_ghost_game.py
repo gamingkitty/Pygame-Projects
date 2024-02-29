@@ -11,6 +11,7 @@ import BossMain
 import medpack
 import relic
 
+
 #KEEP CODE CLEAN
 #KCC
 
@@ -23,6 +24,9 @@ while True:
 
     screen_width = SCREEN.get_width()
     screen_height = SCREEN.get_height()
+
+    # Just takes into account the screen width to maintain aspect ratio on images.
+    screen_scaler = screen_width/1920
 
     CLOCK = pygame.time.Clock()
     TimeTracker = pygame.time.Clock()
@@ -44,7 +48,7 @@ while True:
     RED = (255, 0, 0)
 
     #speed, max_hp, attack_power, projectile_speed, scream_delay, max_bullets, pierce, shield_duration, reload_speed, shield_cooldown_time, reload_bar, medpack_chance, size=(64, 64)
-    ghost_player = player.Player(5, 300, 10, 10, 60, 10, 1, 300, 120, 1800, bar.Bar(0, (51, 9), (200, 120), YELLOW, DARK_GRAY, 1, 1), 5, (64, 64))
+    ghost_player = player.Player(5, 300, 10, 10, 60, 10, 1, 300, 120, 1800, bar.Bar(0, (51, 9), (200, 120), YELLOW, DARK_GRAY, 1, 1), 5, (int(64 * screen_scaler), int(64 * screen_scaler)))
     ghost_player.rect.center = (screen_width/2, screen_height/2)
 
     screams = []
@@ -65,9 +69,9 @@ while True:
 
     #screen visuals for menus
     #button: image_path, size, location
-    quit_button = button.Button(pygame.image.load("Sprites/quit.png"), (262, 92), (screen_width / 2, screen_height / 1.8))
+    quit_button = button.Button(pygame.image.load("Sprites/quit.png"), (int(262 * screen_scaler), int(92 * screen_scaler)), (screen_width / 2, screen_height / 1.8))
 
-    replay_button = button.Button(pygame.image.load("Sprites/replay.png"), (262, 82), (screen_width / 2, screen_height / 1.53))
+    replay_button = button.Button(pygame.image.load("Sprites/replay.png"), (int(262 * screen_scaler), int(82 * screen_scaler)), (screen_width / 2, screen_height / 1.53))
 
     darken_surface = pygame.Surface((screen_width, screen_height))
     darken_surface.set_alpha(128)
@@ -80,30 +84,30 @@ while True:
 
     #shop items
     #price, price_increase, display_text, text_color, font_size, background_color, size, location, upgrade_type, upgrade_amount, max_amount
-    attack_upgrade = shopitem.ShopItem(1, 1, "Attack", YELLOW, 60, DARK_GRAY, (130, 40), (screen_width * 0.865, 200), "attack", 5, 15)
-    hp_upgrade = shopitem.ShopItem(1, 1, "Health", YELLOW, 60, DARK_GRAY, (135, 40), (screen_width * 0.865, 290), "hp", 50, 30)
-    speed_upgrade = shopitem.ShopItem(1, 2, "Speed", YELLOW, 60, DARK_GRAY, (125, 40), (screen_width * 0.865, 380), "speed", 1, 10)
-    pierce_upgrade = shopitem.ShopItem(3, 3, "Pierce", YELLOW, 60, DARK_GRAY, (130, 40), (screen_width * 0.865, 470), "pierce", 1, 5)
-    attack_speed_upgrade = shopitem.ShopItem(1, 1, "Attack Speed", YELLOW, 60, DARK_GRAY, (270, 40), (screen_width * 0.865, 560), "attack_speed", 5, 10)
-    bullets_upgrade = shopitem.ShopItem(1, 0, "Screams", YELLOW, 60, DARK_GRAY, (152, 40), (screen_width * 0.865, 650), "max_bullets", 10, 5)
-    shield_unlock_upgrade = shopitem.ShopItem(3, 0, "Unlock Shield", YELLOW, 60, DARK_GRAY, (282, 40), (screen_width * 0.865, 740), "shield_unlock", 2, 1)
+    attack_upgrade = shopitem.ShopItem(1, 1, "Attack", YELLOW, 60, DARK_GRAY, (int(130 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.865, 200), "attack", 5, 15)
+    hp_upgrade = shopitem.ShopItem(1, 1, "Health", YELLOW, 60, DARK_GRAY, (int(135 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.865, 290), "hp", 50, 30)
+    speed_upgrade = shopitem.ShopItem(1, 2, "Speed", YELLOW, 60, DARK_GRAY, (int(125 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.865, 380), "speed", 1, 10)
+    pierce_upgrade = shopitem.ShopItem(3, 3, "Pierce", YELLOW, 60, DARK_GRAY, (int(130 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.865, 470), "pierce", 1, 5)
+    attack_speed_upgrade = shopitem.ShopItem(1, 1, "Attack Speed", YELLOW, 60, DARK_GRAY, (int(270 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.865, 560), "attack_speed", 5, 10)
+    bullets_upgrade = shopitem.ShopItem(1, 0, "Screams", YELLOW, 60, DARK_GRAY, (int(152 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.865, 650), "max_bullets", 10, 5)
+    shield_unlock_upgrade = shopitem.ShopItem(3, 0, "Unlock Shield", YELLOW, 60, DARK_GRAY, (int(282 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.865, 740), "shield_unlock", 2, 1)
 
     #relics
-    medpack_relic = relic.Relic(pygame.image.load("Sprites/Relics/medpackrelic.png"), (120, 200),
+    medpack_relic = relic.Relic(pygame.image.load("Sprites/Relics/medpackrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
                                 (-500, screen_height/2), "medpack")
-    reload_relic = relic.Relic(pygame.image.load("Sprites/Relics/reloadrelic.png"), (120, 200),
+    reload_relic = relic.Relic(pygame.image.load("Sprites/Relics/reloadrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
                                (-500, screen_height / 2), "reload")
-    lifesteal_relic = relic.Relic(pygame.image.load("Sprites/Relics/lifestealrelic.png"), (120, 200),
+    lifesteal_relic = relic.Relic(pygame.image.load("Sprites/Relics/lifestealrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
                                   (-500, screen_height / 2), "lifesteal")
-    max_upgrade_relic = relic.Relic(pygame.image.load("Sprites/Relics/maxupgraderelic.png"), (120, 200),
+    max_upgrade_relic = relic.Relic(pygame.image.load("Sprites/Relics/maxupgraderelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
                                     (-500, screen_height / 2), "maxupgrade")
-    scream_shield_relic = relic.Relic(pygame.image.load("Sprites/Relics/screamshieldrelic.png"), (120, 200),
+    scream_shield_relic = relic.Relic(pygame.image.load("Sprites/Relics/screamshieldrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
                                       (-500, screen_height / 2), "screamshield")
-    upgrade_point_relic = relic.Relic(pygame.image.load("Sprites/Relics/upgradepointrelic.png"), (120, 200),
+    upgrade_point_relic = relic.Relic(pygame.image.load("Sprites/Relics/upgradepointrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
                                       (-500, screen_height / 2), "upgradepoint")
-    heal_relic = relic.Relic(pygame.image.load("Sprites/Relics/healrelic.png"), (120, 200),
+    heal_relic = relic.Relic(pygame.image.load("Sprites/Relics/healrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
                              (-500, screen_height / 2), "heal")
-    heat_seeking_relic = relic.Relic(pygame.image.load("Sprites/Relics/heatseekingrelic.png"), (120, 200),
+    heat_seeking_relic = relic.Relic(pygame.image.load("Sprites/Relics/heatseekingrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
                                (-500, screen_height / 2), "heatseeking")
 
     offered_relics = [medpack_relic, reload_relic, lifesteal_relic, max_upgrade_relic, scream_shield_relic,
@@ -112,11 +116,11 @@ while True:
     #bars
     #percent_full, size, location, color, background_color, border_percentx, border_percenty
     #the border_percentx/y is just like how much bigger the border is than the bar, 1, 1 is same size
-    exp_bar = bar.Bar(1, (301, 25), (200, 80), BLUE, DARK_GRAY, 0.98, 0.8)
-    hp_bar = bar.Bar(1, (301, 25), (200, 120), RED, DARK_GRAY, 0.98, 0.8)
+    exp_bar = bar.Bar(1, (int(301 * screen_scaler), int(25 * screen_scaler)), (200, 80), BLUE, DARK_GRAY, 0.98, 0.8)
+    hp_bar = bar.Bar(1, (int(301 * screen_scaler), int(25 * screen_scaler)), (200, 120), RED, DARK_GRAY, 0.98, 0.8)
 
     def spawn_sans(attack_power, speed, attack_speed, max_hp):
-        new_sans = sans_enemy.Sans(attack_power * (1 + ghost_player.level / 12), speed * (1 + ghost_player.level / 35), attack_speed, max_hp * (1 + ghost_player.level / 10), bar.Bar(1, (51, 9), (0, 0), RED, DARK_GRAY, 1, 1), (74, 74))
+        new_sans = sans_enemy.Sans(attack_power * (1 + ghost_player.level / 12), speed * (1 + ghost_player.level / 35), attack_speed, max_hp * (1 + ghost_player.level / 10), bar.Bar(1, (51, 9), (0, 0), RED, DARK_GRAY, 1, 1), (int(74 * screen_scaler), int(74 * screen_scaler)))
         new_sans.rect.center = (random.choice([0, screen_width]), random.choice([0, screen_height]))
         sanses.append(new_sans)
 
@@ -127,12 +131,12 @@ while True:
                                                  attack_speed * (1 + ghost_player.level / 15),
                                                  max_hp * (1 + ghost_player.level / 10),
                                                  bar.Bar(1, (27, 9), (0, 0), RED, DARK_GRAY, 1, 1),
-                                                 rock_time + ghost_player.level * 15, (74, 74))
+                                                 rock_time + ghost_player.level * 15, (int(74 * screen_scaler), int(74 * screen_scaler)))
         new_rock_lobber.rect.center = (random.choice([0, screen_width]), random.choice([0, screen_height]))
         rock_lobbers.append(new_rock_lobber)
 
     def create_medpack(location, heal_amount):
-        new_medpack = medpack.Medpack(heal_amount)
+        new_medpack = medpack.Medpack(heal_amount, (int(32 * screen_scaler), int(38 * screen_scaler)))
         new_medpack.rect.center = location
         medpacks.append(new_medpack)
 
@@ -142,6 +146,7 @@ while True:
         Bosses.append(new_boss)
 
     def draw_text(text, color, size, x, y, aligned="center"):
+        size = int(size * screen_scaler)
         font = pygame.font.Font(None, size)
         text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect()
@@ -407,7 +412,7 @@ while True:
                     if event.key == pygame.K_d:
                         move_right = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    ghost_player.scream(screams)
+                    ghost_player.scream(screams, screen_scaler)
             else:
                 if paused_screen:
                     if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:

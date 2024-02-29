@@ -33,6 +33,7 @@ class ShopItem():
         item_image = pygame.Surface(size)
         item_image.fill(background_color)
         item_image.blit(font.render(display_text, True, text_color), item_image.get_rect())
+        item_image = pygame.transform.scale(item_image, size)
         self.item_image = item_image
         self.button = button.Button(item_image, size, location)
         self.bought = 0

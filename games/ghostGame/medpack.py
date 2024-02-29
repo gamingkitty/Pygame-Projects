@@ -10,6 +10,7 @@ class Medpack(pygame.sprite.Sprite):
         #misc
         self.rect = pygame.Rect((0, 0), size)
         self.image = pygame.image.load("Sprites/medpack.png")
+        self.image = pygame.transform.scale(self.image, size)
 
     def load(self, SCREEN):
         SCREEN.blit(self.image, self.rect)

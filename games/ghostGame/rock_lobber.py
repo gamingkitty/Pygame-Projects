@@ -18,6 +18,7 @@ class RockLobber(pygame.sprite.Sprite):
         #misc
         self.rect = pygame.Rect((0, 0), size)
         self.image = pygame.image.load("Sprites/rock_thrower.png")
+        self.image = pygame.transform.scale(self.image, size)
         self.angle = 0
 
         #timers

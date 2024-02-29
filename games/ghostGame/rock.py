@@ -14,6 +14,7 @@ class Rock(pygame.sprite.Sprite):
         #misc
         self.rect = pygame.Rect((0, 0), size)
         self.image = pygame.image.load("Sprites/Rock.png")
+        self.image = pygame.transform.scale(self.image, size)
 
         #timers
         self.attack_cooldown = 0

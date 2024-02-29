@@ -41,6 +41,7 @@ class Player:
 
         # misc
         self.image = pygame.image.load("Sprites/player_ghost.png")
+        self.image = pygame.transform.scale(self.image, size)
         self.rect = pygame.Rect((0, 0), size)
         self.score = 0
         self.reload_bar = reload_bar
@@ -85,13 +86,13 @@ class Player:
     def move_right(self):
         self.rect.centerx += self.speed
 
-    def scream(self, screams):
+    def scream(self, screams, screen_scaler):
         if self.scream_cooldown <= 0 and self.bullets > 0:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             rel_x = mouse_x - self.rect.x
             rel_y = mouse_y - self.rect.y
             angle = math.atan2(rel_y, rel_x)
-            new_scream = scream.Scream(self.attack_power, self.projectile_speed, self.pierce, self.has_heat_seeking, (32, 32))
+            new_scream = scream.Scream(self.attack_power, self.projectile_speed, self.pierce, self.has_heat_seeking, (int(32 * screen_scaler), int(32 * screen_scaler)))
             new_scream.angle = angle
             new_scream.rect.center = self.rect.center
             screams.append(new_scream)
