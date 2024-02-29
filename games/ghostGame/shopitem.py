@@ -2,8 +2,8 @@ import pygame
 import button
 
 
-def draw_text(text, color, size, x, y, SCREEN, aligned="center"):
-    font = pygame.font.Font(None, size)
+def draw_text(text, color, size, x, y, SCREEN, screen_scaler, aligned="center"):
+    font = pygame.font.Font(None, int(size * screen_scaler))
     text_surface = font.render(text, True, color)
     text_rect = text_surface.get_rect()
     if aligned == "center":
@@ -38,11 +38,11 @@ class ShopItem():
         self.button = button.Button(item_image, size, location)
         self.bought = 0
 
-    def load(self, SCREEN):
+    def load(self, SCREEN, screen_scaler):
         self.button.load(SCREEN)
-        draw_text(str(self.bought), self.text_color, self.font_size, self.location[0] + 40 + self.size[0]/2, self.location[1], SCREEN)
+        draw_text(str(self.bought), self.text_color, self.font_size, self.location[0] + 40 + self.size[0]/2, self.location[1], SCREEN, screen_scaler)
         if not self.maxed:
-            draw_text("(" + str(self.price) + ")", self.text_color, self.font_size, self.location[0] - 30 - self.size[0]/2, self.location[1], SCREEN)
+            draw_text("(" + str(self.price) + ")", self.text_color, self.font_size, self.location[0] - 30 - self.size[0]/2, self.location[1], SCREEN, screen_scaler)
 
     def buy(self, player):
         if self.upgrade_type == "hp":
