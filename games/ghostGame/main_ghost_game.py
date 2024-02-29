@@ -116,8 +116,8 @@ while True:
     #bars
     #percent_full, size, location, color, background_color, border_percentx, border_percenty
     #the border_percentx/y is just like how much bigger the border is than the bar, 1, 1 is same size
-    exp_bar = bar.Bar(1, (int(301 * screen_scaler), int(25 * screen_scaler)), (200, 80), BLUE, DARK_GRAY, 0.98, 0.8)
-    hp_bar = bar.Bar(1, (int(301 * screen_scaler), int(25 * screen_scaler)), (200, 120), RED, DARK_GRAY, 0.98, 0.8)
+    exp_bar = bar.Bar(1, (int(301 * screen_scaler), int(25 * screen_scaler)), (50 + int((301 * screen_scaler)/2), 80), BLUE, DARK_GRAY, 0.98, 0.8)
+    hp_bar = bar.Bar(1, (int(301 * screen_scaler), int(25 * screen_scaler)), (50 + int((301 * screen_scaler)/2), 80 + int(40 * screen_scaler)), RED, DARK_GRAY, 0.98, 0.8)
 
     def spawn_sans(attack_power, speed, attack_speed, max_hp):
         new_sans = sans_enemy.Sans(attack_power * (1 + ghost_player.level / 12), speed * (1 + ghost_player.level / 35), attack_speed, max_hp * (1 + ghost_player.level / 10), bar.Bar(1, (51, 9), (0, 0), RED, DARK_GRAY, 1, 1), (int(74 * screen_scaler), int(74 * screen_scaler)))
@@ -159,12 +159,12 @@ while True:
     def draw_hud():
         draw_text(str(ghost_player.level), BLUE, 36, 200, 50)
         draw_text(str(hours) + " : " + str(minutes) + " : " + str(seconds), GREEN, 20, screen_width/2, 50)
-        draw_text("Screams: " + str(ghost_player.bullets), BLUE, 36, 50, 160, "topleft")
+        draw_text("Screams: " + str(ghost_player.bullets), BLUE, 36, 50, 80 + int(80 * screen_scaler), "topleft")
         if ghost_player.has_shield:
             if ghost_player.shield_cooldown <= 0:
                 draw_text("Shield: Press q", BLUE, 36, 50, 190, "topleft")
             else:
-                draw_text("Shield: On Cooldown For " + str(round(ghost_player.shield_cooldown / 60)) + " Seconds", BLUE, 36, 50, 190, "topleft")
+                draw_text("Shield: On Cooldown For " + str(round(ghost_player.shield_cooldown / 60)) + " Seconds", BLUE, 36, 50, 80 + int(110 * screen_scaler), "topleft")
         draw_text("Press TAB to open the shop!", YELLOW, 36, screen_width * 0.9, 35)
         #bars
         exp_bar.load(SCREEN)
