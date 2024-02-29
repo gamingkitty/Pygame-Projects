@@ -13,6 +13,7 @@ class Scream(pygame.sprite.Sprite):
         #misc
         self.rect = pygame.Rect((0, 0), size)
         self.image = pygame.image.load("Sprites/screem.png")
+        self.image = pygame.transform.scale(self.image, size)
         self.angle = 0
         self.damaged = []
         self.is_heat_seeking = is_heat_seeking

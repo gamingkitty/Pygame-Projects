@@ -15,6 +15,7 @@ class Sans(pygame.sprite.Sprite):
         #misc
         self.rect = pygame.Rect((0, 0), size)
         self.image = pygame.image.load("Sprites/sans.png")
+        self.image = pygame.transform.scale(self.image, size)
         self.angle = 0
 
         #timers

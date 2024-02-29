@@ -1,9 +1,10 @@
 import button
+import pygame
 
 
 class Relic:
     def __init__(self, image, size, location, type):
-        self.button = button.Button(image, size, location)
+        self.button = button.Button(pygame.transform.scale(image, size), size, location)
         self.type = type
         self.bought_count = 0
 
