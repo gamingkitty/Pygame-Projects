@@ -85,7 +85,7 @@ class Boss(pygame.sprite.Sprite):
 
     def ranged_attack(self, character, missiles):
         if self.attack_timer <= 0:
-            num_missiles = random.randint(1,5)  # Number of missiles in the barrage
+            num_missiles = random.randint(int(self.power/20),int(self.power/3))  # Number of missiles in the barrage
             angle_increment = 1/2 * math.pi / num_missiles  # Angle increment between each missile
 
             player_x, player_y = character.rect.centerx, character.rect.centery
