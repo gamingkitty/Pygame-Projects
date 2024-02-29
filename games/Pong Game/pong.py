@@ -4,10 +4,10 @@ import os
 from moviepy.editor import VideoFileClip
 import random
 import tictactoe
-
+import os
 # Initialize Pygame
 pygame.init()
-
+dirname = os.path.dirname(__file__)
 # Constants
 WIDTH, HEIGHT = 800, 600
 BORDER_SIZE = 10
@@ -22,7 +22,7 @@ pygame.display.set_caption("Pong")
 tic_tac_toe_game = tictactoe.TicTacToe()
 
 # Load your ads for the video
-video_folder = "C://Users//dylan//PycharmProjects//pythonProject"  # Update this path to the folder containing your videos
+video_folder = dirname  # Update this path to the folder containing your videos
 video_files = sorted([os.path.join(video_folder, file) for file in os.listdir(video_folder) if file.endswith(".mp4")])
 current_video = 0
 
