@@ -116,8 +116,8 @@ while True:
     #bars
     #percent_full, size, location, color, background_color, border_percentx, border_percenty
     #the border_percentx/y is just like how much bigger the border is than the bar, 1, 1 is same size
-    exp_bar = bar.Bar(1, (int(301 * screen_scaler), int(25 * screen_scaler)), (50 + int((301 * screen_scaler)/2), 80), BLUE, DARK_GRAY, 0.98, 0.8)
-    hp_bar = bar.Bar(1, (int(301 * screen_scaler), int(25 * screen_scaler)), (50 + int((301 * screen_scaler)/2), 80 + int(40 * screen_scaler)), RED, DARK_GRAY, 0.98, 0.8)
+    exp_bar = bar.Bar(1, (int(301 * screen_scaler), int(25 * screen_scaler)), (50 + int((301 * screen_scaler)/2), 50 + int(30 * screen_scaler)), BLUE, DARK_GRAY, 0.98, 0.8)
+    hp_bar = bar.Bar(1, (int(301 * screen_scaler), int(25 * screen_scaler)), (50 + int((301 * screen_scaler)/2), 50 + int(70 * screen_scaler)), RED, DARK_GRAY, 0.98, 0.8)
 
     def spawn_sans(attack_power, speed, attack_speed, max_hp):
         new_sans = sans_enemy.Sans(attack_power * (1 + ghost_player.level / 12), speed * (1 + ghost_player.level / 35), attack_speed, max_hp * (1 + ghost_player.level / 10), bar.Bar(1, (51, 9), (0, 0), RED, DARK_GRAY, 1, 1), (int(74 * screen_scaler), int(74 * screen_scaler)))
