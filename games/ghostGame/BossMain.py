@@ -51,7 +51,7 @@ class Sword(pygame.sprite.Sprite):
 class Boss(pygame.sprite.Sprite):
     def __init__(self, speed, max_hp, hp_bar, power, size=(74, 74)):
         super().__init__()
-        #stats
+        # stats
         self.power = power
         self.speed = speed
         self.true_speed = speed
@@ -72,6 +72,7 @@ class Boss(pygame.sprite.Sprite):
         #misc
         self.rect = pygame.Rect((0, 0), size)
         self.image = pygame.image.load("Sprites/Mech.png")
+        self.image = pygame.transform.scale(self.image, size)
         self.angle = 0
         self.rotated_image = self.image
         self.rotated_rect = self.rect
