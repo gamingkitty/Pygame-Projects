@@ -3,7 +3,7 @@ import sys
 import os
 from moviepy.editor import VideoFileClip
 import random
-import tictactoesw
+import tictactoe
 
 # Initialize Pygame
 pygame.init()
@@ -19,7 +19,7 @@ FONT = pygame.font.Font(pygame.font.get_default_font(), 36)
 # Create the game window
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pong")
-tic_tac_toe_game = game_logic.TicTacToe()
+tic_tac_toe_game = tictactoe.TicTacToe()
 
 # Load your ads for the video
 video_folder = "C://Users//dylan//PycharmProjects//pythonProject"  # Update this path to the folder containing your videos
