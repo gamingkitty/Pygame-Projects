@@ -84,13 +84,13 @@ while True:
 
     #shop items
     #price, price_increase, display_text, text_color, font_size, background_color, size, location, upgrade_type, upgrade_amount, max_amount
-    attack_upgrade = shopitem.ShopItem(1, 1, "Attack", YELLOW, 60, DARK_GRAY, (int(130 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200), "attack", 5, 15, screen_scaler)
-    hp_upgrade = shopitem.ShopItem(1, 1, "Health", YELLOW, 60, DARK_GRAY, (int(135 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200 + int(90 * screen_scaler)), "hp", 50, 30, screen_scaler)
-    speed_upgrade = shopitem.ShopItem(1, 2, "Speed", YELLOW, 60, DARK_GRAY, (int(125 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200 + int(180 * screen_scaler)), "speed", 1, 10, screen_scaler)
-    pierce_upgrade = shopitem.ShopItem(3, 3, "Pierce", YELLOW, 60, DARK_GRAY, (int(130 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200 + int(270 * screen_scaler)), "pierce", 1, 5, screen_scaler)
-    attack_speed_upgrade = shopitem.ShopItem(1, 1, "Attack Speed", YELLOW, 60, DARK_GRAY, (int(270 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200 + int(360 * screen_scaler)), "attack_speed", 5, 10, screen_scaler)
-    bullets_upgrade = shopitem.ShopItem(1, 0, "Screams", YELLOW, 60, DARK_GRAY, (int(152 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200 + int(450 * screen_scaler)), "max_bullets", 10, 5, screen_scaler)
-    shield_unlock_upgrade = shopitem.ShopItem(3, 0, "Unlock Shield", YELLOW, 60, DARK_GRAY, (int(282 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200 + int(540 * screen_scaler)), "shield_unlock", 2, 1, screen_scaler)
+    attack_upgrade = shopitem.ShopItem(1, 1, "Attack", YELLOW, int(60 * screen_scaler), DARK_GRAY, (int(130 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200), "attack", 5, 15, screen_scaler)
+    hp_upgrade = shopitem.ShopItem(1, 1, "Health", YELLOW, int(60 * screen_scaler), DARK_GRAY, (int(135 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200 + int(90 * screen_scaler)), "hp", 50, 30, screen_scaler)
+    speed_upgrade = shopitem.ShopItem(1, 2, "Speed", YELLOW, int(60 * screen_scaler), DARK_GRAY, (int(125 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200 + int(180 * screen_scaler)), "speed", 1, 10, screen_scaler)
+    pierce_upgrade = shopitem.ShopItem(3, 3, "Pierce", YELLOW, int(60 * screen_scaler), DARK_GRAY, (int(130 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200 + int(270 * screen_scaler)), "pierce", 1, 5, screen_scaler)
+    attack_speed_upgrade = shopitem.ShopItem(1, 1, "Attack Speed", YELLOW, int(60 * screen_scaler), DARK_GRAY, (int(270 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200 + int(360 * screen_scaler)), "attack_speed", 5, 10, screen_scaler)
+    bullets_upgrade = shopitem.ShopItem(1, 0, "Screams", YELLOW, int(60 * screen_scaler), DARK_GRAY, (int(152 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200 + int(450 * screen_scaler)), "max_bullets", 10, 5, screen_scaler)
+    shield_unlock_upgrade = shopitem.ShopItem(3, 0, "Unlock Shield", YELLOW, int(60 * screen_scaler), DARK_GRAY, (int(282 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 200 + int(540 * screen_scaler)), "shield_unlock", 2, 1, screen_scaler)
 
     #relics
     medpack_relic = relic.Relic(pygame.image.load("Sprites/Relics/medpackrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
