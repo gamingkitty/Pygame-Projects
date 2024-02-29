@@ -1,13 +1,5 @@
 import pygame
 import math
-import sys
-import os
-
-
-def resource_path(relative):
-    if hasattr(sys, "_MEIPASS"):
-        return os.path.join(sys._MEIPASS, relative)
-    return os.path.join(relative)
 
 
 class Medpack(pygame.sprite.Sprite):
@@ -17,7 +9,8 @@ class Medpack(pygame.sprite.Sprite):
 
         #misc
         self.rect = pygame.Rect((0, 0), size)
-        self.image = pygame.image.load(resource_path("Sprites/medpack.png"))
+        self.image = pygame.image.load("Sprites/medpack.png")
+        self.image = pygame.transform.scale(self.image, size)
 
     def load(self, SCREEN):
         SCREEN.blit(self.image, self.rect)

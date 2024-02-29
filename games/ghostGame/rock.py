@@ -3,7 +3,7 @@ import math
 
 
 class Rock(pygame.sprite.Sprite):
-    def __init__(self, attack_power, attack_speed, rock_time, size=(74, 74)):
+    def __init__(self, attack_power, attack_speed, rock_time, size=(50, 27)):
         #stats
         self.attack_speed = attack_speed
         self.attack_power = attack_power
@@ -14,6 +14,7 @@ class Rock(pygame.sprite.Sprite):
         #misc
         self.rect = pygame.Rect((0, 0), size)
         self.image = pygame.image.load("Sprites/Rock.png")
+        self.image = pygame.transform.scale(self.image, size)
 
         #timers
         self.attack_cooldown = 0

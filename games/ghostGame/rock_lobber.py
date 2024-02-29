@@ -18,6 +18,7 @@ class RockLobber(pygame.sprite.Sprite):
         #misc
         self.rect = pygame.Rect((0, 0), size)
         self.image = pygame.image.load("Sprites/rock_thrower.png")
+        self.image = pygame.transform.scale(self.image, size)
         self.angle = 0
 
         #timers
@@ -25,7 +26,7 @@ class RockLobber(pygame.sprite.Sprite):
 
     def load(self, SCREEN):
         SCREEN.blit(self.image, self.rect)
-        self.hp_bar.location = (self.rect.centerx - 21, self.rect.centery - 44)
+        self.hp_bar.location = (self.rect.centerx, self.rect.centery - 44)
         self.hp_bar.set_percent_full(self.hp/self.max_hp)
         self.hp_bar.load(SCREEN)
 
