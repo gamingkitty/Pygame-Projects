@@ -22,7 +22,7 @@ pygame.display.set_caption("Pong")
 tic_tac_toe_game = tictactoe.TicTacToe()
 
 # Load your ads for the video
-video_folder = "C://Users//dylan//PycharmProjects//pythonProject"  # Update this path to the folder containing your videos
+video_folder = "C:\\Users\\brier\\PycharmProjects\\pygameGames\\games\\Pong Game"  # Update this path to the folder containing your videos
 video_files = sorted([os.path.join(video_folder, file) for file in os.listdir(video_folder) if file.endswith(".mp4")])
 current_video = 0
 
