@@ -42,9 +42,9 @@ class ShopItem():
 
     def load(self, SCREEN):
         self.button.load(SCREEN)
-        draw_text(str(self.bought), self.text_color, self.font_size, self.location[0] + int(40 * self.screen_scalar) + self.size[0]/2, self.location[1], SCREEN)
+        draw_text(str(self.bought), self.text_color, self.font_size, self.location[0] + int(40 * self.screen_scaler) + self.size[0]/2, self.location[1], SCREEN)
         if not self.maxed:
-            draw_text("(" + str(self.price) + ")", self.text_color, self.font_size, self.location[0] - int(30 * self.screen_scalar) - self.size[0]/2, self.location[1], SCREEN)
+            draw_text("(" + str(self.price) + ")", self.text_color, self.font_size, self.location[0] - int(30 * self.screen_scaler) - self.size[0]/2, self.location[1], SCREEN)
 
     def buy(self, player):
         if self.upgrade_type == "hp":
