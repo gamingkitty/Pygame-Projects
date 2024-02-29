@@ -26,7 +26,7 @@ class RockLobber(pygame.sprite.Sprite):
 
     def load(self, SCREEN):
         SCREEN.blit(self.image, self.rect)
-        self.hp_bar.location = (self.rect.centerx - 21, self.rect.centery - 44)
+        self.hp_bar.location = (self.rect.centerx, self.rect.centery - 44)
         self.hp_bar.set_percent_full(self.hp/self.max_hp)
         self.hp_bar.load(SCREEN)
 

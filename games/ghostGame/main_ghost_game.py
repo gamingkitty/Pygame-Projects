@@ -130,7 +130,7 @@ while True:
                                                  attack_speed * 2,
                                                  attack_speed * (1 + ghost_player.level / 15),
                                                  max_hp * (1 + ghost_player.level / 10),
-                                                 bar.Bar(1, (27, 9), (0, 0), RED, DARK_GRAY, 1, 1),
+                                                 bar.Bar(1, (51, 9), (0, 0), RED, DARK_GRAY, 1, 1),
                                                  rock_time + ghost_player.level * 15, (int(74 * screen_scaler), int(74 * screen_scaler)))
         new_rock_lobber.rect.center = (random.choice([0, screen_width]), random.choice([0, screen_height]))
         rock_lobbers.append(new_rock_lobber)
