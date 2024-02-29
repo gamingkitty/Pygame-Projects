@@ -12,8 +12,9 @@ import medpack
 import relic
 
 
-#KEEP CODE CLEAN
-#KCC
+# KEEP CODE CLEAN
+# KCC
+
 
 while True:
     pygame.init()
