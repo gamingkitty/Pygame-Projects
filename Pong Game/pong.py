@@ -3,7 +3,7 @@ import sys
 import os
 from moviepy.editor import VideoFileClip
 import random
-import game_logic
+import tictactoesw
 
 # Initialize Pygame
 pygame.init()
