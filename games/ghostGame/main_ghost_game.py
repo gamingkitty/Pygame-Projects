@@ -157,7 +157,7 @@ while True:
         SCREEN.blit(text_surface, text_rect)
 
     def draw_hud():
-        draw_text(str(ghost_player.level), BLUE, 36, int(200 * screen_scaler), 50)
+        draw_text(str(ghost_player.level), BLUE, 36, 50 + int((301 * screen_scaler)/2), 50)
         draw_text(str(hours) + " : " + str(minutes) + " : " + str(seconds), GREEN, 20, screen_width/2, 50)
         draw_text("Screams: " + str(ghost_player.bullets), BLUE, 36, 50, 80 + int(80 * screen_scaler), "topleft")
         if ghost_player.has_shield:
