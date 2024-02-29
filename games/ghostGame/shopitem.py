@@ -68,15 +68,16 @@ class ShopItem():
         self.bought += 1
 
         if self.bought >= self.max_amount:
-            self.size = (133, 40)
+            self.size = (int(133 * self.screen_scaler), int(40 * self.screen_scaler))
             self.set_text("Maxed")
 
             self.maxed = True
 
     def set_text(self, text):
-        font = pygame.font.Font(None, int(self.font_size * self.screen_scaler))
+        font = pygame.font.Font(None, self.font_size)
         item_image = pygame.Surface(self.size)
         item_image.fill(self.background_color)
         item_image.blit(font.render(text, True, self.text_color), item_image.get_rect())
+        item_image = pygame.transform.scale(item_image, self.size)
         self.button = button.Button(item_image, self.size, self.location)
 

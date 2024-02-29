@@ -163,7 +163,7 @@ while True:
         draw_text("Screams: " + str(ghost_player.bullets), BLUE, 36, 50, 80 + int(80 * screen_scaler), "topleft")
         if ghost_player.has_shield:
             if ghost_player.shield_cooldown <= 0:
-                draw_text("Shield: Press q", BLUE, 36, 50, 190, "topleft")
+                draw_text("Shield: Press q", BLUE, 36, 50, 80 + int(110 * screen_scaler), "topleft")
             else:
                 draw_text("Shield: On Cooldown For " + str(round(ghost_player.shield_cooldown / 60)) + " Seconds", BLUE, 36, 50, 80 + int(110 * screen_scaler), "topleft")
         draw_text("Press TAB to open the shop!", YELLOW, 36, screen_width * 0.9, 35)
