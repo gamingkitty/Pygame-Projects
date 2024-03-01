@@ -12,8 +12,9 @@ import medpack
 import relic
 
 
-#KEEP CODE CLEAN
-#KCC
+# KEEP CODE CLEAN
+# KCC
+
 
 while True:
     pygame.init()
@@ -47,7 +48,7 @@ while True:
     AQUA = (5, 195, 221)
     RED = (255, 0, 0)
 
-    #speed, max_hp, attack_power, projectile_speed, scream_delay, max_bullets, pierce, shield_duration, reload_speed, shield_cooldown_time, reload_bar, medpack_chance, size=(64, 64)
+    # speed, max_hp, attack_power, projectile_speed, scream_delay, max_bullets, pierce, shield_duration, reload_speed, shield_cooldown_time, reload_bar, medpack_chance, size=(64, 64)
     ghost_player = player.Player(5, 300, 10, 10, 60, 10, 1, 300, 120, 1800, bar.Bar(0, (51, 9), (200, 120), YELLOW, DARK_GRAY, 1, 1), 5, (int(64 * screen_scaler), int(64 * screen_scaler)))
     ghost_player.rect.center = (screen_width/2, screen_height/2)
 
@@ -93,25 +94,27 @@ while True:
     shield_unlock_upgrade = shopitem.ShopItem(3, 0, "Unlock Shield", YELLOW, int(60 * screen_scaler), DARK_GRAY, (int(282 * screen_scaler), int(40 * screen_scaler)), (screen_width * 0.88, 60 + int(680 * screen_scaler)), "shield_unlock", 2, 1, screen_scaler)
 
     #relics
-    medpack_relic = relic.Relic(pygame.image.load("Sprites/Relics/medpackrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
+    medpack_relic = relic.Relic(pygame.image.load("Sprites/Relics/medpackrelic.png"), (120, 200),
                                 (-500, screen_height/2), "medpack")
-    reload_relic = relic.Relic(pygame.image.load("Sprites/Relics/reloadrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
+    reload_relic = relic.Relic(pygame.image.load("Sprites/Relics/reloadrelic.png"), (120, 200),
                                (-500, screen_height / 2), "reload")
-    lifesteal_relic = relic.Relic(pygame.image.load("Sprites/Relics/lifestealrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
+    lifesteal_relic = relic.Relic(pygame.image.load("Sprites/Relics/lifestealrelic.png"), (120, 200),
                                   (-500, screen_height / 2), "lifesteal")
-    max_upgrade_relic = relic.Relic(pygame.image.load("Sprites/Relics/maxupgraderelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
+    max_upgrade_relic = relic.Relic(pygame.image.load("Sprites/Relics/maxupgraderelic.png"), (120, 200),
                                     (-500, screen_height / 2), "maxupgrade")
-    scream_shield_relic = relic.Relic(pygame.image.load("Sprites/Relics/screamshieldrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
+    scream_shield_relic = relic.Relic(pygame.image.load("Sprites/Relics/screamshieldrelic.png"), (120, 200),
                                       (-500, screen_height / 2), "screamshield")
-    upgrade_point_relic = relic.Relic(pygame.image.load("Sprites/Relics/upgradepointrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
+    upgrade_point_relic = relic.Relic(pygame.image.load("Sprites/Relics/upgradepointrelic.png"), (120, 200),
                                       (-500, screen_height / 2), "upgradepoint")
-    heal_relic = relic.Relic(pygame.image.load("Sprites/Relics/healrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
+    heal_relic = relic.Relic(pygame.image.load("Sprites/Relics/healrelic.png"), (120, 200),
                              (-500, screen_height / 2), "heal")
-    heat_seeking_relic = relic.Relic(pygame.image.load("Sprites/Relics/heatseekingrelic.png"), (int(120 * screen_scaler), int(200 * screen_scaler)),
+    heat_seeking_relic = relic.Relic(pygame.image.load("Sprites/Relics/heatseekingrelic.png"), (120, 200),
                                (-500, screen_height / 2), "heatseeking")
+    spawn_rate_relic = relic.Relic(pygame.image.load("Sprites/Relics/spawnraterelic.png"), (120, 200),
+                                (-500, screen_height/2), "spawnrate")
 
     offered_relics = [medpack_relic, reload_relic, lifesteal_relic, max_upgrade_relic, scream_shield_relic,
-                      upgrade_point_relic, heal_relic, heat_seeking_relic]
+                      upgrade_point_relic, heal_relic, heat_seeking_relic, spawn_rate_relic]
 
     #bars
     #percent_full, size, location, color, background_color, border_percentx, border_percenty
@@ -130,7 +133,7 @@ while True:
                                                  attack_speed * 2,
                                                  attack_speed * (1 + ghost_player.level / 15),
                                                  max_hp * (1 + ghost_player.level / 10),
-                                                 bar.Bar(1, (27, 9), (0, 0), RED, DARK_GRAY, 1, 1),
+                                                 bar.Bar(1, (51, 9), (0, 0), RED, DARK_GRAY, 1, 1),
                                                  rock_time + ghost_player.level * 15, (int(74 * screen_scaler), int(74 * screen_scaler)))
         new_rock_lobber.rect.center = (random.choice([0, screen_width]), random.choice([0, screen_height]))
         rock_lobbers.append(new_rock_lobber)
@@ -141,7 +144,7 @@ while True:
         medpacks.append(new_medpack)
 
     def spawn_boss(power):
-        new_boss = BossMain.Boss(1, power * 20, bar.Bar(1, (102, 18), (0, 0), RED, DARK_GRAY, 1, 1), power, (74, 74))
+        new_boss = BossMain.Boss(1, power * 20, bar.Bar(1, (102, 18), (0, 0), RED, DARK_GRAY, 1, 1), power, (int(159 * screen_scaler), int(168 * screen_scaler)))
         new_boss.rect.center = (ghost_player.rect.centerx + random.choice([200,-200]), ghost_player.rect.centery + random.choice([200, -200]))
         Bosses.append(new_boss)
 
@@ -162,7 +165,7 @@ while True:
         draw_text("Screams: " + str(ghost_player.bullets), BLUE, 36, 50, 80 + int(80 * screen_scaler), "topleft")
         if ghost_player.has_shield:
             if ghost_player.shield_cooldown <= 0:
-                draw_text("Shield: Press q", BLUE, 36, 50, 190, "topleft")
+                draw_text("Shield: Press q", BLUE, 36, 50, 80 + int(110 * screen_scaler), "topleft")
             else:
                 draw_text("Shield: On Cooldown For " + str(round(ghost_player.shield_cooldown / 60)) + " Seconds", BLUE, 36, 50, 80 + int(110 * screen_scaler), "topleft")
         draw_text("Press TAB to open the shop!", YELLOW, 36, screen_width * 0.9, 35)
@@ -222,14 +225,16 @@ while True:
 
     relic_picked = False
 
+    spawn_rate_shift = 0
+
     while True:
         SCREEN.fill(BLACK)
         CLOCK.tick(FPS)
         time = TimeTracker.tick()
         ghost_player.stay_on_screen(screen_width, screen_height)
 
-        sans_spawn_delay = 600 * 0.85**minutes
-        rock_lobber_spawn_delay = 1500 * 0.85**minutes
+        sans_spawn_delay = 600 * 0.85**(minutes - spawn_rate_shift)
+        rock_lobber_spawn_delay = 1500 * 0.85**(minutes - 1 - spawn_rate_shift)
 
         if not paused:
             if sans_spawn_timer <= 0:
@@ -319,9 +324,14 @@ while True:
 
         if relic_screen:
             if not relic_picked:
-                relic1 = random.choice(offered_relics)
-                relic2 = random.choice(offered_relics)
-                relic3 = random.choice(offered_relics)
+                offered_relics_copy = []
+                for relic in offered_relics:
+                    offered_relics_copy.append(relic)
+                relic1 = random.choice(offered_relics_copy)
+                offered_relics_copy.remove(relic1)
+                relic2 = random.choice(offered_relics_copy)
+                offered_relics_copy.remove(relic2)
+                relic3 = random.choice(offered_relics_copy)
 
                 relic1.button.rect.center = ((screen_width / 2) - 200, screen_height / 2)
                 relic2.button.rect.center = (screen_width / 2, screen_height / 2)
@@ -454,16 +464,22 @@ while True:
                         if relic1.button.is_mouse_hovering():
                             relic1.buy(ghost_player, offered_relics, [speed_upgrade, hp_upgrade, attack_upgrade, attack_speed_upgrade,
                                                       bullets_upgrade, pierce_upgrade])
+                            if relic1.type == "spawnrate":
+                                spawn_rate_shift += 2
                             relic_screen = False
                             paused = False
                         elif relic2.button.is_mouse_hovering():
                             relic2.buy(ghost_player, offered_relics, [speed_upgrade, hp_upgrade, attack_upgrade, attack_speed_upgrade,
                                                       bullets_upgrade, pierce_upgrade])
+                            if relic2.type == "spawnrate":
+                                spawn_rate_shift += 2
                             relic_screen = False
                             paused = False
                         elif relic3.button.is_mouse_hovering():
                             relic3.buy(ghost_player, offered_relics, [speed_upgrade, hp_upgrade, attack_upgrade, attack_speed_upgrade,
                                                       bullets_upgrade, pierce_upgrade])
+                            if relic3.type == "spawnrate":
+                                spawn_rate_shift += 2
                             relic_screen = False
                             paused = False
 

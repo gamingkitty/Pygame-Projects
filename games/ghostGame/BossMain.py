@@ -51,7 +51,7 @@ class Sword(pygame.sprite.Sprite):
 class Boss(pygame.sprite.Sprite):
     def __init__(self, speed, max_hp, hp_bar, power, size=(74, 74)):
         super().__init__()
-        #stats
+        # stats
         self.power = power
         self.speed = speed
         self.true_speed = speed
@@ -72,6 +72,7 @@ class Boss(pygame.sprite.Sprite):
         #misc
         self.rect = pygame.Rect((0, 0), size)
         self.image = pygame.image.load("Sprites/Mech.png")
+        self.image = pygame.transform.scale(self.image, size)
         self.angle = 0
         self.rotated_image = self.image
         self.rotated_rect = self.rect
@@ -85,7 +86,7 @@ class Boss(pygame.sprite.Sprite):
 
     def ranged_attack(self, character, missiles):
         if self.attack_timer <= 0:
-            num_missiles = random.randint(int(self.power/20),int(self.power/3))  # Number of missiles in the barrage
+            num_missiles = random.randint(int(self.power/30), int(self.power/12))  # Number of missiles in the barrage
             angle_increment = 1/2 * math.pi / num_missiles  # Angle increment between each missile
 
             player_x, player_y = character.rect.centerx, character.rect.centery
