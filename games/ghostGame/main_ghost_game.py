@@ -27,7 +27,7 @@ while True:
     screen_height = SCREEN.get_height()
 
     # Just takes into account the screen width to maintain aspect ratio on images.
-    screen_scaler = screen_width/1920
+    screen_scaler = (screen_width/1920 + screen_height/1080)/2
 
     CLOCK = pygame.time.Clock()
     TimeTracker = pygame.time.Clock()
