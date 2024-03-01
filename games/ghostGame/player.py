@@ -30,7 +30,7 @@ class Player:
         self.lifesteal = 0
         self.has_heat_seeking = False
 
-        self.upgrade_points = 3
+        self.upgrade_points = 0
         self.level = 1
         self.level_up_cost = 50
         self.hp = max_hp
