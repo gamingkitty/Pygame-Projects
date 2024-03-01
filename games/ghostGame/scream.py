@@ -25,14 +25,37 @@ class Scream(pygame.sprite.Sprite):
 
     def move(self, enemies):
         if self.is_heat_seeking and len(enemies) > 0:
-            lowest_distance = 9999999
+            least_error = math.pi
             closest_enemy = None
             for enemy_type in enemies:
                 for enemy in enemy_type:
                     if enemy not in self.damaged:
-                        distance = math.sqrt((self.rect.centerx - enemy.rect.centerx) ** 2 + (self.rect.centery - enemy.rect.centery) ** 2)
-                        if distance < lowest_distance:
-                            lowest_distance = distance
+                        d_y = self.rect.centery - enemy.rect.centery
+                        d_x = self.rect.centerx - enemy.rect.centerx
+                        distance = math.sqrt((self.rect.centerx - enemy.rect.centerx) ** 2 + (
+                                    self.rect.centery - enemy.rect.centery) ** 2)
+                        wanted_angle = self.angle
+                        if d_y > 0 and d_x == 0:
+                            wanted_angle = -math.pi
+                        elif d_y < 0 and d_x == 0:
+                            wanted_angle = math.pi
+                        elif d_x != 0:
+                            wanted_angle = math.atan(d_y / d_x)
+                            if d_y > 0 and d_x > 0:
+                                wanted_angle += math.pi
+                            elif d_y < 0 and d_x > 0:
+                                wanted_angle += math.pi
+                        if wanted_angle > math.pi:
+                            wanted_angle = -(2 * math.pi - wanted_angle)
+                        elif wanted_angle < -math.pi:
+                            wanted_angle = 2 * math.pi + wanted_angle
+                        angle_error = wanted_angle - self.angle
+                        while angle_error > math.pi:
+                            angle_error -= 2 * math.pi
+                        while angle_error < -math.pi:
+                            angle_error += 2 * math.pi
+                        if abs(angle_error) < abs(least_error):
+                            least_error = angle_error
                             closest_enemy = enemy
             if closest_enemy is not None:
                 d_y = self.rect.centery - closest_enemy.rect.centery
