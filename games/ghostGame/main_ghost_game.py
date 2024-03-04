@@ -207,7 +207,7 @@ while True:
     move_up = False
     move_down = False
 
-    paused = False
+    paused = True
 
     can_pause = True
 
@@ -217,7 +217,7 @@ while True:
 
     shop_screen = False
 
-    relic_screen = False
+    relic_screen = True
 
     replay = False
 
@@ -325,8 +325,8 @@ while True:
         if relic_screen:
             if not relic_picked:
                 offered_relics_copy = []
-                for relic in offered_relics:
-                    offered_relics_copy.append(relic)
+                for relic_instance in offered_relics:
+                    offered_relics_copy.append(relic_instance)
                 relic1 = random.choice(offered_relics_copy)
                 offered_relics_copy.remove(relic1)
                 relic2 = random.choice(offered_relics_copy)
