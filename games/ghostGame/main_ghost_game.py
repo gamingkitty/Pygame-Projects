@@ -207,7 +207,7 @@ while True:
     move_up = False
     move_down = False
 
-    paused = True
+    paused = False
 
     can_pause = True
 
@@ -217,7 +217,7 @@ while True:
 
     shop_screen = False
 
-    relic_screen = True
+    relic_screen = False
 
     replay = False
 
