@@ -1,6 +1,5 @@
 import pygame
 import sys
-import os
 from moviepy.editor import VideoFileClip
 import random
 import tictactoe

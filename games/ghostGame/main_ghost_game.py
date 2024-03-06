@@ -14,7 +14,7 @@ import relic
 
 # KEEP CODE CLEAN
 # KCC
-
+# KCC didn't happen :(
 
 while True:
     pygame.init()
