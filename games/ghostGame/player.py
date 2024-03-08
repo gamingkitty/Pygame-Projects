@@ -53,6 +53,7 @@ class Player:
         self.rect = pygame.Rect((0, 0), size)
         self.score = 0
         self.reload_bar = reload_bar
+        self.positions = [self.rect.center for i in range(100)]
 
     def load(self, SCREEN, paused):
         if not paused:
@@ -79,7 +80,8 @@ class Player:
                     self.shield_up_timer -= 1
             else:
                 self.remove_shield()
-
+        self.positions.pop()
+        self.positions.insert(0, self.rect.center)
         SCREEN.blit(self.image, self.rect)
 
     def move_up(self):

@@ -3,7 +3,7 @@ import math
 
 
 class Sans(pygame.sprite.Sprite):
-    def __init__(self, attack_power, speed, attack_speed, max_hp, hp_bar, size=(74, 74)):
+    def __init__(self, attack_power, speed, attack_speed, max_hp, hp_bar, movement_delay, size=(74, 74)):
         #stats
         self.speed = speed
         self.max_hp = max_hp
@@ -13,6 +13,7 @@ class Sans(pygame.sprite.Sprite):
         self.hp_bar = hp_bar
 
         #misc
+        self.movement_delay = movement_delay;
         self.rect = pygame.Rect((0, 0), size)
         self.image = pygame.image.load("Sprites/sans.png")
         self.image = pygame.transform.scale(self.image, size)
@@ -28,15 +29,35 @@ class Sans(pygame.sprite.Sprite):
         self.hp_bar.load(SCREEN)
 
     def move(self, character, screams_list):
-        if character.rect.centerx < self.rect.centerx:
-            self.rect.centerx -= self.speed
-        elif character.rect.centerx > self.rect.centerx:
-            self.rect.centerx += self.speed
-        if character.rect.centery < self.rect.centery:
-            self.rect.centery -= self.speed
-        elif character.rect.centery > self.rect.centery:
-            self.rect.centery += self.speed
-
+        if not self.rect.colliderect(character.rect):
+            position = character.positions[self.movement_delay]
+            d_y = self.rect.centery - character.rect.centery
+            d_x = self.rect.centerx - character.rect.centerx
+            distance = math.sqrt((self.rect.centerx - character.rect.centerx) ** 2 + (
+                        self.rect.centery - character.rect.centery) ** 2)
+            wanted_angle = self.angle
+            if d_y > 0 and d_x == 0:
+                wanted_angle = -math.pi
+            elif d_y < 0 and d_x == 0:
+                wanted_angle = math.pi
+            elif d_x != 0:
+                wanted_angle = math.atan(d_y / d_x)
+                if d_y > 0 and d_x > 0:
+                    wanted_angle += math.pi
+                elif d_y < 0 and d_x > 0:
+                    wanted_angle += math.pi
+            if wanted_angle > math.pi:
+                wanted_angle = -(2 * math.pi - wanted_angle)
+            elif wanted_angle < -math.pi:
+                wanted_angle = 2 * math.pi + wanted_angle
+            angle_error = wanted_angle - self.angle
+            while angle_error > math.pi:
+                angle_error -= 2 * math.pi
+            while angle_error < -math.pi:
+                angle_error += 2 * math.pi
+            self.angle += angle_error / 10
+            self.rect.centerx += math.cos(self.angle) * self.speed
+            self.rect.centery += math.sin(self.angle) * self.speed
         self.attack(character)
         self.get_hit(screams_list)
 
