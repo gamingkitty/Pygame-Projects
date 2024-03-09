@@ -123,7 +123,7 @@ while True:
     hp_bar = bar.Bar(1, (int(301 * screen_scaler), int(25 * screen_scaler)), (50 + int((301 * screen_scaler)/2), 50 + int(70 * screen_scaler)), RED, DARK_GRAY, 0.98, 0.8)
 
     def spawn_sans(attack_power, speed, attack_speed, max_hp):
-        new_sans = sans_enemy.Sans(attack_power * (1 + ghost_player.level / 12), speed * (1 + ghost_player.level / 20), attack_speed, max_hp * (1 + ghost_player.level / 10), bar.Bar(1, (51, 9), (0, 0), RED, DARK_GRAY, 1, 1), random.randint(5, 20), (int(74 * screen_scaler), int(74 * screen_scaler)))
+        new_sans = sans_enemy.Sans(attack_power * (1 + ghost_player.level / 12), speed * (1 + ghost_player.level / 15), attack_speed, max_hp * (1 + ghost_player.level / 10), bar.Bar(1, (51, 9), (0, 0), RED, DARK_GRAY, 1, 1), random.randint(5, 20), (int(74 * screen_scaler), int(74 * screen_scaler)))
         new_sans.rect.center = (random.choice([0, screen_width]), random.choice([0, screen_height]))
         sanses.append(new_sans)
 

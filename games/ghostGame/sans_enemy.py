@@ -13,7 +13,7 @@ class Sans(pygame.sprite.Sprite):
         self.hp_bar = hp_bar
 
         #misc
-        self.movement_delay = movement_delay;
+        self.movement_delay = movement_delay
         self.rect = pygame.Rect((0, 0), size)
         self.image = pygame.image.load("Sprites/sans.png")
         self.image = pygame.transform.scale(self.image, size)
@@ -55,7 +55,7 @@ class Sans(pygame.sprite.Sprite):
                 angle_error -= 2 * math.pi
             while angle_error < -math.pi:
                 angle_error += 2 * math.pi
-            self.angle += angle_error / 10
+            self.angle += angle_error
             self.rect.centerx += math.cos(self.angle) * self.speed
             self.rect.centery += math.sin(self.angle) * self.speed
         self.attack(character)
