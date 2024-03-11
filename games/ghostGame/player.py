@@ -12,7 +12,7 @@ def resource_path(relative):
 
 
 class Player:
-    def __init__(self, speed, max_hp, attack_power, projectile_speed, scream_delay, max_bullets, pierce, shield_duration, reload_speed, shield_cooldown_time, reload_bar, medpack_chance, size=(64, 64)):
+    def __init__(self, speed, max_hp, attack_power, projectile_speed, scream_delay, max_bullets, pierce, shield_duration, reload_speed, shield_cooldown_time, reload_bar, medpack_chance, screen_scaler, size=(64, 64)):
         # stats
         self.speed = speed
         self.projectile_speed = projectile_speed
@@ -25,7 +25,7 @@ class Player:
         self.reload_speed = reload_speed
         self.shield_cooldown_time = shield_cooldown_time
         self.medpack_chance = medpack_chance
-        self.has_shield = False
+        self.has_shield = True
         self.has_scream_shield = False
         self.lifesteal = 0
         self.has_heat_seeking = False
@@ -38,7 +38,7 @@ class Player:
 
         # shield
         self.shield = False
-        self.shield_rect = pygame.Rect((0, 0), (80, 80))
+        self.shield_rect = pygame.Rect((0, 0), (80 * screen_scaler, 80 * screen_scaler))
         self.shield_image = pygame.image.load("Sprites/shield.png")
 
         # timers
@@ -54,6 +54,7 @@ class Player:
         self.score = 0
         self.reload_bar = reload_bar
         self.positions = [self.rect.center for i in range(100)]
+        self.screen_scaler = screen_scaler
 
     def load(self, SCREEN, paused):
         if not paused:

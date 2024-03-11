@@ -50,12 +50,7 @@ class Sans(pygame.sprite.Sprite):
                 wanted_angle = -(2 * math.pi - wanted_angle)
             elif wanted_angle < -math.pi:
                 wanted_angle = 2 * math.pi + wanted_angle
-            angle_error = wanted_angle - self.angle
-            while angle_error > math.pi:
-                angle_error -= 2 * math.pi
-            while angle_error < -math.pi:
-                angle_error += 2 * math.pi
-            self.angle += angle_error
+            self.angle = wanted_angle
             self.rect.centerx += math.cos(self.angle) * self.speed
             self.rect.centery += math.sin(self.angle) * self.speed
         self.attack(character)

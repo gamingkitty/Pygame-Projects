@@ -32,22 +32,22 @@ class RockLobber(pygame.sprite.Sprite):
 
     def move(self, character, screams_list, rocks):
         if abs(character.rect.centery - self.rect.centery) + abs(character.rect.centerx - self.rect.centerx) > 500:
-            if character.rect.centerx < self.rect.centerx:
+            if character.rect.centerx < self.rect.centerx - 5:
                 self.rect.centerx -= self.speed
-            elif character.rect.centerx > self.rect.centerx:
+            elif character.rect.centerx > self.rect.centerx + 5:
                 self.rect.centerx += self.speed
-            if character.rect.centery < self.rect.centery:
+            if character.rect.centery < self.rect.centery - 5:
                 self.rect.centery -= self.speed
-            elif character.rect.centery > self.rect.centery:
+            elif character.rect.centery > self.rect.centery + 5:
                 self.rect.centery += self.speed
         elif abs(character.rect.centery - self.rect.centery) + abs(character.rect.centerx - self.rect.centerx) < 400:
-            if character.rect.centerx < self.rect.centerx:
+            if character.rect.centerx < self.rect.centerx - 5:
                 self.rect.centerx += self.speed
-            elif character.rect.centerx > self.rect.centerx:
+            elif character.rect.centerx > self.rect.centerx + 5:
                 self.rect.centerx -= self.speed
-            if character.rect.centery < self.rect.centery:
+            if character.rect.centery < self.rect.centery - 5:
                 self.rect.centery += self.speed
-            elif character.rect.centery > self.rect.centery:
+            elif character.rect.centery > self.rect.centery + 5:
                 self.rect.centery -= self.speed
 
         self.attack(character, rocks)

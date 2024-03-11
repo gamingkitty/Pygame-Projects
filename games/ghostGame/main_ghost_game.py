@@ -49,7 +49,7 @@ while True:
     RED = (255, 0, 0)
 
     # speed, max_hp, attack_power, projectile_speed, scream_delay, max_bullets, pierce, shield_duration, reload_speed, shield_cooldown_time, reload_bar, medpack_chance, size=(64, 64)
-    ghost_player = player.Player(5, 300, 10, 10, 60, 10, 1, 300, 120, 1800, bar.Bar(0, (51, 9), (200, 120), YELLOW, DARK_GRAY, 1, 1), 5, (int(64 * screen_scaler), int(64 * screen_scaler)))
+    ghost_player = player.Player(5, 300, 10, 10, 60, 10, 1, 300, 120, 1800, bar.Bar(0, (51 * screen_scaler, 9 * screen_scaler), (200, 120), YELLOW, DARK_GRAY, 1, 1), 5, screen_scaler, (int(64 * screen_scaler), int(64 * screen_scaler)))
     ghost_player.rect.center = (screen_width/2, screen_height/2)
 
     screams = []
