@@ -59,6 +59,8 @@ while True:
     missles = []
     rock_lobbers = []
     medpacks = []
+    nidema = ['n', 'i', 'd', 'e', 'm', 'a']
+    last_keys_pressed = ['', '', '', '', '', '']
 
     sans_spawn_timer = 200
     sans_spawn_delay = 500
@@ -228,6 +230,9 @@ while True:
     spawn_rate_shift = 0
 
     while True:
+        if last_keys_pressed == nidema:
+            spawn_rate_shift = -99
+            last_keys_pressed = ['', '', '', '', '', '']
         SCREEN.fill(BLACK)
         CLOCK.tick(FPS)
         time = TimeTracker.tick()
@@ -389,6 +394,8 @@ while True:
                 sys.exit()
             if not paused:
                 if event.type == pygame.KEYDOWN:
+                    last_keys_pressed.pop(0)
+                    last_keys_pressed.append(event.unicode)
                     if event.key == pygame.K_s:
                         move_down = True
                     if event.key == pygame.K_w:

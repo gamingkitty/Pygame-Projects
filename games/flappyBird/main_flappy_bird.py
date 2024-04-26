@@ -34,7 +34,6 @@ def death_screen(screen, darken_surface, color, score):
     draw_text(screen, "Game Over!", color, 100, screen.get_width()/2, screen.get_height()/2.7)
     draw_text(screen, "Final Score: " + str(score), color, 80, screen.get_width()/2, screen.get_height()/1.8)
 
-
 def main():
     # Colors
     black = (0, 0, 0)
@@ -138,6 +137,16 @@ def main():
                 if not bird_player.dead:
                     if event.key == pygame.K_SPACE:
                         bird_player.velocity_y = -400
+                else:
+                    if event.key == pygame.K_SPACE:
+                        bird_player.dead = False
+                        entities.clear()
+                        add_pole_cooldown = 100
+                        add_pole_timer = 100
+                        bird_player = player.Player(["Sprites/flappy_bird_up.png", "Sprites/flappy_bird_middle.png",
+                                                     "Sprites/flappy_bird_down.png"], (68, 48), (400, 100))
+
+
 
         screen.blit(ground_img, ground_rect)
 

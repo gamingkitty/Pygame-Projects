@@ -25,7 +25,7 @@ class Player:
         self.reload_speed = reload_speed
         self.shield_cooldown_time = shield_cooldown_time
         self.medpack_chance = medpack_chance
-        self.has_shield = True
+        self.has_shield = False
         self.has_scream_shield = False
         self.lifesteal = 0
         self.has_heat_seeking = False
