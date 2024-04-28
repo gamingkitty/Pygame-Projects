@@ -16,6 +16,8 @@ Click on it and click ```Install```
 Next, you will have to install PyGame. To do this, open Command Prompt if you are on Windows and Terminal if you are on Mac, and then run the following command: ```pip install pygame```
 
 # Pushing your games to GitHub
+> If you are using VSCode, switch to PyCharm. VSCode does not have a built in git feature and the extension is very buggy.
+
 If you want to push your games to GitHub, you will need to [create a github account](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home) if you don't have one already.
 
 Once you create your account (or if you have one already), [fork this repository](https://github.com/gamingkitty/Pygame-Projects/fork).
@@ -41,9 +43,6 @@ Sample games are in the ```games``` folder.
 To pull your files from GitHub, click on ```Git```>```Pull...```
 
 To push your files to GitHub, you need to commit them first. To do this, click on ```Git```>```Commit...``` and select the files you want to commit. Then, write your commit message in the provided box, and click ```Commit and Push``` if you want to push them to GitHub.
-
-## If you are using VSCode
-Switch to using PyCharm. VSCode does not have a built in git feature and the extension is very buggy.
 
 # If you are not pyshing to GitHub
 You can download [this template](https://github.com/gamingkitty/Pygame-Projects/blob/master/exampleFiles/game_scaffold.py) to get started with Pygame.
