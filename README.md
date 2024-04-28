@@ -44,7 +44,7 @@ To pull your files from GitHub, click on ```Git```>```Pull...```
 
 To push your files to GitHub, you need to commit them first. To do this, click on ```Git```>```Commit...``` and select the files you want to commit. Then, write your commit message in the provided box, and click ```Commit and Push``` if you want to push them to GitHub.
 
-# If you are not pyshing to GitHub
+# If you are not pushing to GitHub
 You can download [this template](https://github.com/gamingkitty/Pygame-Projects/blob/master/exampleFiles/game_scaffold.py) to get started with Pygame.
 
 The sample games are [here](https://github.com/gamingkitty/Pygame-Projects/tree/master/games)
