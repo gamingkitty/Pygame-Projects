@@ -42,6 +42,8 @@ def main():
         for entity in entities:
             entity.load(screen, delta_time, entities)
 
+        #Enter your code here in the loop
+
         # Handle key presses and other events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
