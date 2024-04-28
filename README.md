@@ -38,7 +38,7 @@ The template is in ```exampleFiles/game_scaffold.py```.
 Sample games are in the ```games``` folder.
 
 ### Pushing, Committing, and Pulling
-To pull your files from GitHub, click in ```Git```>```Pull...```
+To pull your files from GitHub, click on ```Git```>```Pull...```
 
 To push your files to GitHub, you need to commit them first. To do this, click on ```Git```>```Commit...``` and select the files you want to commit. Then, write your commit message in the provided box, and click ```Commit and Push``` if you want to push them to GitHub.
 
