@@ -4,9 +4,11 @@
 # Installing Python
 If you have Python installed on your device, you can skip this step. Otherwise, go to [this website](https://www.python.org/downloads/) to get it installed.
 
-In addition to Python, also install an IDE if you don't have one already. [PyCharm (make sure to scroll down to download community edition)](https://jetbrains.com/pycharm/download/) and [VSCode](https://code.visualstudio.com/download) are some great free IDEs for coding Python (if you want to push your files to GitHub, it is best to use PyCharm).
+In addition to Python, also install an IDE if you don't have one already. [PyCharm (make sure to scroll down to download community edition)](https://jetbrains.com/pycharm/download/) and [VSCode](https://code.visualstudio.com/download) are some great free IDEs for coding Python *(if you want to push your files to GitHub, it is best to use PyCharm).*
 
-If you are using VSCode: make sure to install the Python extension provided by Mircosoft. To do this, first go to the extensions tab on the left sidebar (the icon with the four boxes)
+### If you are using VSCode
+
+Make sure to install the Python extension provided by Mircosoft. To do this, first go to the extensions tab on the left sidebar (the icon with the four boxes)
 ![](tutorial%20pictures/Extensions%20Tab.png)
 Then, search "python" in the search bar. The one you need should be the first one that shows up and should be from Microsoft.
 ![](tutorial%20pictures/Extensions%20Tab%20Search%20Python.png)
