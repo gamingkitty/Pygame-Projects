@@ -37,7 +37,7 @@ Once you are logged in, the window should look like this (with a different accou
 
 For the URL, go to your forked GitHub repository, and click the green ```<> Code``` dropdown on the page.
 ![](tutorial%20pictures/GitHub%20Clone%20URL.png)
-Then, copy the HTTPS link and paste it into the URL section of the PyCharm VCS popup.
+Then, copy the HTTPS link and paste it into the URL section of the PyCharm VCS popup and click ```Clone```.
 
 Now, all the files should be cloned and ready to go!
 
