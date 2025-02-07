@@ -8,7 +8,7 @@ In addition to Python, also install an IDE if you don't have one already. [PyCha
 
 ### If you are using VSCode
 
-Make sure to install the Python extension provided by Mircosoft. To do this, first go to the extensions tab on the left sidebar (the icon with the four boxes)
+Make sure to install the Python extension provided by Microsoft. To do this, first go to the extensions tab on the left sidebar (the icon with the four boxes)
 ![](tutorial%20pictures/Extensions%20Tab.png)
 Then, search "python" in the search bar. The one you need should be the first one that shows up and should be from Microsoft.
 ![](tutorial%20pictures/Extensions%20Tab%20Search%20Python.png)
