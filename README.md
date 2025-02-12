@@ -8,7 +8,7 @@ In addition to Python, also install an IDE if you don't have one already. [PyCha
 
 ### If you are using VSCode
 
-Make sure to install the Python extension provided by Mircosoft. To do this, first go to the extensions tab on the left sidebar (the icon with the four boxes)
+Make sure to install the Python extension provided by Microsoft. To do this, first go to the extensions tab on the left sidebar (the icon with the four boxes)
 ![](tutorial%20pictures/Extensions%20Tab.png)
 Then, search "python" in the search bar. The one you need should be the first one that shows up and should be from Microsoft.
 ![](tutorial%20pictures/Extensions%20Tab%20Search%20Python.png)
@@ -37,7 +37,7 @@ Once you are logged in, the window should look like this (with a different accou
 
 For the URL, go to your forked GitHub repository, and click the green ```<> Code``` dropdown on the page.
 ![](tutorial%20pictures/GitHub%20Clone%20URL.png)
-Then, copy the HTTPS link and paste it into the URL section of the PyCharm VCS popup.
+Then, copy the HTTPS link and paste it into the URL section of the PyCharm VCS popup and click ```Clone```.
 
 Now, all the files should be cloned and ready to go!
 
