@@ -11,7 +11,6 @@ import BossMain
 import medpack
 import relic
 
-
 # KEEP CODE CLEAN
 # KCC
 # KCC didn't happen :(
@@ -48,6 +47,7 @@ while True:
     AQUA = (5, 195, 221)
     RED = (255, 0, 0)
 
+
     # speed, max_hp, attack_power, projectile_speed, scream_delay, max_bullets, pierce, shield_duration, reload_speed, shield_cooldown_time, reload_bar, medpack_chance, size=(64, 64)
     ghost_player = player.Player(5, 300, 10, 10, 60, 10, 1, 300, 120, 1800, bar.Bar(0, (51 * screen_scaler, 9 * screen_scaler), (200, 120), YELLOW, DARK_GRAY, 1, 1), 5, screen_scaler, (int(64 * screen_scaler), int(64 * screen_scaler)))
     ghost_player.rect.center = (screen_width/2, screen_height/2)
@@ -72,9 +72,12 @@ while True:
 
     #screen visuals for menus
     #button: image_path, size, location
-    quit_button = button.Button(pygame.image.load("Sprites/quit.png"), (int(262 * screen_scaler), int(92 * screen_scaler)), (screen_width / 2, screen_height / 1.8))
+    quit_button_sheet = button.make_button("QUIT", pygame.font.SysFont("Calibri", 50), 3, (255, 0, 0), (255, 255, 255), (262, 120), screen_scaler)
+    quit_button = button.Button(screen_scaler, (screen_width / 2, screen_height / 1.8), quit_button_sheet, (262, 119), True)
 
-    replay_button = button.Button(pygame.image.load("Sprites/replay.png"), (int(262 * screen_scaler), int(82 * screen_scaler)), (screen_width / 2, screen_height / 1.53))
+    replay_button_sheet = button.make_button("REPLAY", pygame.font.SysFont("Calibri", 50), 3, (0, 255, 0),
+                                           (255, 255, 255), (262, 82), screen_scaler)
+    replay_button = button.Button(screen_scaler, (screen_width / 2, screen_height / 1.53), replay_button_sheet, (262, 82), True)
 
     darken_surface = pygame.Surface((screen_width, screen_height))
     darken_surface.set_alpha(128)
@@ -436,16 +439,26 @@ while True:
                         paused = False
                         paused_screen = False
                     elif event.type == pygame.MOUSEBUTTONDOWN:
-                        pos = pygame.mouse.get_pos()
                         if quit_button.is_mouse_hovering():
+                            quit_button.clicked = True
+                    elif event.type == pygame.MOUSEBUTTONUP:
+                        if quit_button.is_mouse_hovering() and quit_button.clicked:
                             sys.exit()
+                        quit_button.clicked = False
                 if death_screen:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         if quit_button.is_mouse_hovering():
-                            sys.exit()
+                            quit_button.clicked = True
                         if replay_button.is_mouse_hovering():
+                            replay_button.clicked = True
+                    elif event.type == pygame.MOUSEBUTTONUP:
+                        if quit_button.is_mouse_hovering() and quit_button.clicked:
+                            sys.exit()
+                        if replay_button.is_mouse_hovering() and replay_button.clicked:
                             replay = True
                             break
+                        quit_button.clicked = False
+                        replay_button.clicked = False
                 if shop_screen:
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_TAB or event.key == pygame.K_ESCAPE:

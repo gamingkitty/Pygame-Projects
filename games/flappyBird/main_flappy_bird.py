@@ -34,6 +34,7 @@ def death_screen(screen, darken_surface, color, score):
     draw_text(screen, "Game Over!", color, 100, screen.get_width()/2, screen.get_height()/2.7)
     draw_text(screen, "Final Score: " + str(score), color, 80, screen.get_width()/2, screen.get_height()/1.8)
 
+
 def main():
     # Colors
     black = (0, 0, 0)

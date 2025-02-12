@@ -1,10 +1,11 @@
 import button
 import pygame
+import sprite_sheet
 
 
 class Relic:
     def __init__(self, image, size, location, type):
-        self.button = button.Button(pygame.transform.scale(image, size), size, location)
+        self.button = button.Button(1, location, sprite_sheet.SpriteSheet("", size, 1, 0, image), size)
         self.type = type
         self.bought_count = 0
 
